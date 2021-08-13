@@ -1,4 +1,5 @@
 import os
+import re
 import tweepy as tp
 from dotenv import load_dotenv
 from flask import Flask, render_template, request
@@ -23,8 +24,13 @@ def index():
 @app.route("/", methods=['POST'])
 def get_form():
     twitter_id = request.form['user-id']
-    fav_tweets = api.favorites(twitter_id)
-    return render_template('result.html', twitter_id=twitter_id, fav_tweets=fav_tweets)
+    fav_tweets = api.favorites(twitter_id, count=50)
+    url_pattern = re.compile("https://")
+    text_only_tweets = []
+    for tweet in fav_tweets:
+        if not(url_pattern.search(tweet.text)):
+            text_only_tweets.append(tweet)
+    return render_template('result.html', twitter_id=twitter_id, fav_tweets=text_only_tweets)
 
 
 if __name__ == "__main__":
