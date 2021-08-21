@@ -14,6 +14,7 @@ ACCESS_TOKEN_SECRET = os.environ.get("ACCESS_TOKEN_SECRET")
 
 CALLBACK_URL = "http://127.0.0.1:8000/auth"
 auth = tp.OAuthHandler(CONSUMER_API_KEY, CONSUMER_SECRET_API_KEY, CALLBACK_URL)
+auth.set_access_token(ACCESS_TOKEN, ACCESS_TOKEN_SECRET)
 
 
 @app.route("/")
@@ -32,9 +33,9 @@ def login():
 
 
 @app.route('/auth', methods=['GET'])
-def show():
+def authorize():
     api = tp.API(auth)
-    user_id = "@unacceptablee2"
+    user_id = api.me().screen_name
     fav_tweets = api.favorites(user_id, count=10)
     url_pattern = re.compile("https://")
     text_only_tweets = []
