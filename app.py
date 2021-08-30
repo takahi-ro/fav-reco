@@ -12,7 +12,9 @@ CONSUMER_SECRET_API_KEY = os.environ.get("CONSUMER_SECRET_API_KEY")
 ACCESS_TOKEN = os.environ.get("ACCESS_TOKEN")
 ACCESS_TOKEN_SECRET = os.environ.get("ACCESS_TOKEN_SECRET")
 
-CALLBACK_URL = "http://127.0.0.1:8000/auth"
+# CALLBACK_URL = "http://127.0.0.1:8000/auth"
+
+CALLBACK_URL="https://young-dawn-36523.herokuapp.com/auth"
 auth = tp.OAuthHandler(CONSUMER_API_KEY, CONSUMER_SECRET_API_KEY, CALLBACK_URL)
 auth.set_access_token(ACCESS_TOKEN, ACCESS_TOKEN_SECRET)
 
