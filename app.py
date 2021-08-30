@@ -4,7 +4,7 @@ import tweepy as tp
 from dotenv import load_dotenv
 from flask import Flask, render_template, request, session, redirect
 app = Flask(__name__)
-app.secret_key = 'user'
+app.secret_key = "asPdljfaasdu3lv"
 
 load_dotenv()
 CONSUMER_API_KEY = os.environ.get("CONSUMER_API_KEY")
@@ -12,10 +12,8 @@ CONSUMER_SECRET_API_KEY = os.environ.get("CONSUMER_SECRET_API_KEY")
 ACCESS_TOKEN = os.environ.get("ACCESS_TOKEN")
 ACCESS_TOKEN_SECRET = os.environ.get("ACCESS_TOKEN_SECRET")
 
-# CALLBACK_URL = "http://127.0.0.1:8000/auth"
-CALLBACK_URL="https://young-dawn-36523.herokuapp.com/auth"
-auth = tp.OAuthHandler(CONSUMER_API_KEY, CONSUMER_SECRET_API_KEY, CALLBACK_URL)
-auth.set_access_token(ACCESS_TOKEN, ACCESS_TOKEN_SECRET)
+# CALLBACK_URL = "http://127.0.0.1:8000/favorites"
+CALLBACK_URL="https://young-dawn-36523.herokuapp.com/favorites"
 
 
 @app.route("/")
@@ -25,16 +23,21 @@ def index():
 
 @app.route('/login', methods=['GET'])
 def login():
+    auth = tp.OAuthHandler(CONSUMER_API_KEY, CONSUMER_SECRET_API_KEY, CALLBACK_URL)
+    auth.set_access_token(ACCESS_TOKEN, ACCESS_TOKEN_SECRET)
+    session['request_token'] = auth.request_token
     try:
         redirect_url = auth.get_authorization_url()
+        print("successfully get redirect URL")
     except tp.TweepError as e:
-        print(e)
-    session['request_token'] = auth.request_token
+        print("faild to get redirect URL", e)
     return redirect(redirect_url)
 
 
-@app.route('/auth', methods=['GET'])
-def authorize():
+@app.route('/favorites', methods=['GET'])
+def favorites():
+    auth = tp.OAuthHandler(CONSUMER_API_KEY, CONSUMER_SECRET_API_KEY, CALLBACK_URL)
+    auth.set_access_token(ACCESS_TOKEN, ACCESS_TOKEN_SECRET)
     api = tp.API(auth)
     user_id = api.me().screen_name
     fav_tweets = api.favorites(user_id, count=10)
@@ -47,4 +50,4 @@ def authorize():
 
 
 if __name__ == "__main__":
-    app.run(debug=True, port=8000, threaded=True)
+    app.run(debug=False, port=8000, threaded=True)
