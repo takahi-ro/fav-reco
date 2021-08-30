@@ -24,20 +24,25 @@ def index():
 @app.route('/login', methods=['GET'])
 def login():
     auth = tp.OAuthHandler(CONSUMER_API_KEY, CONSUMER_SECRET_API_KEY, CALLBACK_URL)
-    auth.set_access_token(ACCESS_TOKEN, ACCESS_TOKEN_SECRET)
-    session['request_token'] = auth.request_token
     try:
         redirect_url = auth.get_authorization_url()
-        print("successfully get redirect URL")
+        session['request_token'] = auth.request_token
     except tp.TweepError as e:
-        print("faild to get redirect URL", e)
+        print(vars(e))
     return redirect(redirect_url)
 
 
 @app.route('/favorites', methods=['GET'])
 def favorites():
+    verifier = request.args.get('oauth_verifier')
     auth = tp.OAuthHandler(CONSUMER_API_KEY, CONSUMER_SECRET_API_KEY, CALLBACK_URL)
-    auth.set_access_token(ACCESS_TOKEN, ACCESS_TOKEN_SECRET)
+    token = session['request_token']
+    session.pop('request_token', None)
+    auth.request_token = token
+    try:
+        auth.get_access_token(verifier)
+    except tp.TweepError as e:
+        print(vars(e))
     api = tp.API(auth)
     user_id = api.me().screen_name
     fav_tweets = api.favorites(user_id, count=10)
