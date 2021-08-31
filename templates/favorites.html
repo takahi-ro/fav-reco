@@ -13,11 +13,9 @@
           <li><a href="/login">LOGIN</a></li>
         </ul>
       </header>
-        <h1>recommended book</h1>
-        <h2>{{ book_title }}</h2>
-        <img src={{ book_image }} alt="book image">
-        <p>{{ book_caption }}</p>
-        <p>{{ sales_date }}</p>
-        <a href={{ item_url }}>楽天で購入</a>
+      <h1>{{twitter_id}} favorites</h1>
+      {% for tweet in fav_tweets %}
+        <li>{{ tweet.text }}</li>
+      {% endfor %}
     </body>
 </html>
