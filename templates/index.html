@@ -5,14 +5,49 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <title>fav-reco</title>
+        <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14"></script>
+        <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/blog/">
     </head>
     <body>
+
+      <div id="appRoot">
+          <app-header  :link1 = "appLink1" :link2 = "appLink2" ></app-header>
+          <h1>[[appTitle]]</h1>
+        
+      </div>
+    
+
+
+    <!-- 無駄にVue.jsの練習がてらVueで書く -->
+    <script type = 'text/x-template' id = 'header'>
       <header>
         <ul>
-          <li><a href="/">HOME</a></li>
-          <li><a href="/login">LOGIN</a></li>
+          <li><a href="/">[[link1]]</a></li>
+          <li><a href="/login">[[link2]]</a></li>
         </ul>
       </header>
-        <h1>fav-reco</h1>
+    </script>
+
+
+
+    <script>
+    Vue.component('app-header',{
+      template: '#header',
+      props : ['link1','link2'],
+      delimiters: ['[[', ']]']
+    })
+
+
+    var app =  new Vue({
+       el: '#appRoot',
+       data : {
+         appTitle: 'fav-reco',
+         appLink1: 'HOME',
+         appLink2: 'LOGIN'
+       },
+       delimiters: ['[[', ']]']
+     })
+
+    </script>
     </body>
 </html>
