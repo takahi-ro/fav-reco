@@ -1,7 +1,7 @@
 'use strict'
 Vue.component('app-header',{
     template: '#header',
-    props : ['link1','link2'],
+    props : ['link1','link2','link3','link4','logo'],
     delimiters: ['[[', ']]']
   })
 
@@ -9,9 +9,11 @@ Vue.component('app-header',{
   var app =  new Vue({
      el: '#appRoot',
      data : {
-       appTitle: 'fav-reco',
-       appLink1: 'HOME',
-       appLink2: 'LOGIN'
+       appTitle: 'つぶやき書店',
+       appLink1: 'TOP(つぶやき書店とは）',
+       appLink2:'使い方',
+       appLink3: '書店を利用する',
+       appLink4: 'Github'
      },
      delimiters: ['[[', ']]']
    })

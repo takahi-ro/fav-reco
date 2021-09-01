@@ -25,15 +25,23 @@
     </style>
     </head>
     <body>
-
+      
       <div id="appRoot">
-          <app-header  :link1 = "appLink1" :link2 = "appLink2" ></app-header>
-          <h1>[[appTitle]]</h1>
-        
+        <div class="backgroundImg">
+          <app-header  :link1 = "appLink1" :link2 = "appLink2" :logo = "appTitle"  :link3 = "appLink3" :link4 = "appLink4"></app-header>
+          <h1 class = 'frontText'>[[appTitle]]</h1>
+        </div> 
+        <p style = 'margin-top:100px; margin-bottom:100px'>つぶやき書店つぶやき書店つぶやき書店つぶやき書店つぶやき書店つぶやき書店つぶやき書店つぶやき書店つぶやき書店つぶやき書店つぶやき書店つぶやき書店つぶやき書店つぶやき書店つぶやき書店つぶやき書店つぶやき書店つぶやき書店つぶやき書店つぶやき書店つぶやき書店つぶやき書店つぶやき書店つぶやき書店つぶやき書店つぶやき書店つぶやき書店つぶやき書店つぶやき書店つぶやき書店つぶやき書店つぶやき書店つぶやき書店つぶやき書店つぶやき書店つぶやき書店つぶやき書店つぶやき書店つぶやき書店つぶやき書店つぶやき書店つぶやき書店つぶやき書店つぶやき書店つぶやき書店つぶやき書店つぶやき書店つぶやき書店つぶやき書店つぶやき書店つぶやき書店つぶやき書店つぶやき書店つぶやき書店つぶやき書店つぶやき書店</p>
+
+        <p style = 'margin-top:100px;  margin-bottom:100px;'>つぶやき書店つぶやき書店つぶやき書店つぶやき書店つぶやき書店つぶやき書店つぶやき書店つぶやき書店つぶやき書店つぶやき書店つぶやき書店つぶやき書店つぶやき書店つぶやき書店つぶやき書店つぶやき書店つぶやき書店つぶやき書店つぶやき書店つぶやき書店つぶやき書店つぶやき書店つぶやき書店つぶやき書店つぶやき書店つぶやき書店つぶやき書店つぶやき書店つぶやき書店つぶやき書店つぶやき書店つぶやき書店つぶやき書店つぶやき書店つぶやき書店つぶやき書店つぶやき書店つぶやき書店つぶやき書店つぶやき書店つぶやき書店つぶやき書店つぶやき書店つぶやき書店つぶやき書店つぶやき書店つぶやき書店つぶやき書店つぶやき書店つぶやき書店つぶやき書店つぶやき書店つぶやき書店つぶやき書店つぶやき書店つぶやき書店</p>
+
+        <p style = 'margin-top:100px;  margin-bottom:100px'>つぶやき書店つぶやき書店つぶやき書店つぶやき書店つぶやき書店つぶやき書店つぶやき書店つぶやき書店つぶやき書店つぶやき書店つぶやき書店つぶやき書店つぶやき書店つぶやき書店つぶやき書店つぶやき書店つぶやき書店つぶやき書店つぶやき書店つぶやき書店つぶやき書店つぶやき書店つぶやき書店つぶやき書店つぶやき書店つぶやき書店つぶやき書店つぶやき書店つぶやき書店つぶやき書店つぶやき書店つぶやき書店つぶやき書店つぶやき書店つぶやき書店つぶやき書店つぶやき書店つぶやき書店つぶやき書店つぶやき書店つぶやき書店つぶやき書店つぶやき書店つぶやき書店つぶやき書店つぶやき書店つぶやき書店つぶやき書店つぶやき書店つぶやき書店つぶやき書店つぶやき書店つぶやき書店つぶやき書店つぶやき書店つぶやき書店</p>
       </div>
     
 
-
+      <footer>
+        <a href="#" id="page-top">TOP</a>
+      </footer>
     
 
 
@@ -41,9 +49,10 @@
     
     <!-- 無駄にVue.jsの練習がてらVueで書く -->
     <script type = 'text/x-template' id = 'header'>
-      <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+      <!-- <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark"> -->
+      <nav class="navbar navbar-dark fixed-top bg-dark">
         <div class="container-fluid">
-          <a class="navbar-brand" href="#">Fixed navbar</a>
+          <a class="navbar-brand" href="/">[[logo]]</a>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
@@ -52,8 +61,14 @@
               <li class="nav-item active">
                 <a class="nav-link" aria-current="page" href="/">[[link1]]</a>
               </li>
+              <li class="nav-item ">
+                <a class="nav-link" aria-current="page" href="/">[[link2]]</a>
+              </li>
               <li class="nav-item">
-                <a class="nav-link" href="/login">[[link2]]</a>
+                <a class="nav-link" href="/login">[[link3]]</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/">[[link4]]</a>
               </li>
             </ul>
             <!-- <form class="d-flex">
