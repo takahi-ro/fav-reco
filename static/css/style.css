@@ -9,20 +9,8 @@
     scroll-behavior: smooth;
 }
 
-.frontText {
-  margin-top:-10px;
-  text-align: center;
-  font-size: 40px;
-  letter-spacing: 8px;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translateY(-50%) translateX(-50%);
-  -webkit-transform: translateY(-50%) translateX(-50%);
-
-  color: #fff;
-  background: #111;
-  padding: 10px;
+.navBar{
+  background-color:#150201;
 }
 
 .backgroundImg {
@@ -52,6 +40,18 @@
     background-repeat: no-repeat;
   }
 }
+
+.catchCopy{
+  background-color: rgba(0,0,0,0.5);
+  position:absolute;
+  width:60%;
+  height:50%;
+  top:35vh;
+  left:3vw;
+  padding:30px;
+}
+
+
 
 /***追従するトップへ戻るボタン***/
 #page-top {
