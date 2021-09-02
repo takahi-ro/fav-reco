@@ -14,10 +14,11 @@
         </ul>
       </header>
         <h1>recommended book</h1>
-        <h2>{{ book_title }}</h2>
-        <img src={{ book_image }} alt="book image">
-        <p>{{ book_caption }}</p>
-        <p>{{ sales_date }}</p>
+        <h2>{{ book_info.title }}</h2>
+        <img src={{ book_info.image }} alt="book image">
+        <p>{{ book_info.caption }}</p>
+        <p>発売日：{{ book_info.sales_date }}</p>
+        <p>出版社：{{ book_info.publisher }}</p>
         <a href={{ item_url }}>楽天で購入</a>
     </body>
 </html>

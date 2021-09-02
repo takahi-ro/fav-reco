@@ -1,23 +1,30 @@
 import requests
 
 
-APPLICATION_ID = "1095524729477042360"
-search_keyword = "息吹"
-api_url = "https://app.rakuten.co.jp/services/api/BooksBook/Search/20170404"
-params = {
-        "format": "json",
-        "title": search_keyword,
-        "applicationId": APPLICATION_ID,
-        "hits": 1,
-        "sort": "sales"
-        }
 
-results = requests.get(api_url, params).json()
-# print(results)
-print("author:", results['Items'][0]['Item']['author'])
-print("title:", results['Items'][0]['Item']['title'])
-print("image URL:", results['Items'][0]['Item']['mediumImageUrl'])
-print("caption:", results['Items'][0]['Item']['itemCaption'])
-print("sales Date:", results['Items'][0]['Item']['salesDate'])
-print("item URL:", results['Items'][0]['Item']['itemUrl'])
+def getBookInfoFromISBN(isbn):
+    APPLICATION_ID = "1095524729477042360"
+    api_url = "https://app.rakuten.co.jp/services/api/BooksBook/Search/20170404"
+    params = {
+            "format": "json",
+            "applicationId": APPLICATION_ID,
+            "isbn": isbn,
+            "hits": 1,
+            "sort": "sales"
+            }
+    results_json = requests.get(api_url, params).json()
+    book_info = results_json['Items'][0]['Item']
+    results = {
+            "title": book_info["title"],
+            "image": book_info["mediumImageUrl"],
+            "author": book_info["author"],
+            "caption": book_info["itemCaption"],
+            "sales_date": book_info["salesDate"],
+            "publisher": book_info["publisherName"],
+            "rakuten_url": book_info["itemUrl"]
+            }
+    return results
 
+
+sample_isbn = "4041099153"
+print(getBookInfoFromISBN(sample_isbn))
