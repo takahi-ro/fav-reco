@@ -2,6 +2,10 @@ import re
 import tweepy as tp
 
 
+"""
+ 検索したい単語と取ってきたいTweet数(デフォルトは10)を引数に渡すと，
+ 検索したい単語を含んだtweetをリストにして返す
+"""
 def getTweetsFromSearchWords(search_word, count=10):
     CONSUMER_API_KEY = "SOciKVMCVQU4ZqucCpLsf5MvS"
     CONSUMER_SECRET_API_KEY = "7vcZ4O3zTQ2yulxxLPhICCaOydWGabSEcsTja10viFCrJLHzhz"
