@@ -6,7 +6,10 @@ import sys
 from collections import defaultdict
 import numpy as np
 import matplotlib.pyplot as plt
+import pandas as pd
 
+df = pd.read_csv('/Users/jinya/Desktop/fav-reco/test/Jinya/data/aozora.csv')
+titles = df["title"]
 
 # モデルを読み込む
 # モデルは絶対パスで指定してください
@@ -16,7 +19,8 @@ m = Doc2Vec.load('/Users/jinya/Desktop/fav-reco/test/Jinya/models/Doc2Vec.model'
 vectors_list = [m.docvecs[n] for n in range(len(m.docvecs))]
 
 # ドキュメント番号のリスト
-doc_nums = range(200, 200+len(m.docvecs))
+doc_nums = range(len(m.docvecs))
+print(doc_nums)
 
 # クラスタリング設定
 # クラスター数を変えたい場合はn_clustersを変えてください
@@ -33,10 +37,9 @@ labels = kmeans_model.labels_
 # ラベルとドキュメント番号の辞書づくり
 cluster_to_docs = defaultdict(list)
 for cluster_id, doc_num in zip(labels, doc_nums):
-    cluster_to_docs[cluster_id].append(doc_num)
+    cluster_to_docs[cluster_id].append(titles[doc_num])
 
 # クラスター出力
-
 for docs in cluster_to_docs.values():
     print(docs)
 
@@ -52,7 +55,6 @@ left = range(n_clusters)
 height = []
 for docs in cluster_to_docs.values():
     height.append(len(docs))
-print(height, left, x_label_name)
 
 # 棒グラフ設定
 plt.bar(left, height, color="#FF5B70", tick_label=x_label_name, align="center")
