@@ -13,8 +13,8 @@ CONSUMER_SECRET_API_KEY = os.environ.get("CONSUMER_SECRET_API_KEY")
 ACCESS_TOKEN = os.environ.get("ACCESS_TOKEN")
 ACCESS_TOKEN_SECRET = os.environ.get("ACCESS_TOKEN_SECRET")
 
-# CALLBACK_URL = "http://127.0.0.1:8000/favorites"
-CALLBACK_URL="https://young-dawn-36523.herokuapp.com/favorites"
+CALLBACK_URL = "http://127.0.0.1:8000/favorites"
+# CALLBACK_URL="https://young-dawn-36523.herokuapp.com/favorites"
 
 
 @app.route("/")

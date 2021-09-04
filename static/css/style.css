@@ -9,12 +9,15 @@
     scroll-behavior: smooth;
 }
 
+body {
+  background-color:#F2EFE5;
+}
+
 .navBar{
   background-color:#150201;
 }
 
 .backgroundImg {
-  width: 100%;
   height: 100vh;
   /* display: flex; */
   align-items: center; /* 縦方向中央揃え */
@@ -80,3 +83,7 @@
   transform-origin: left top;
 }
 /***トップへ戻るボタンここまで***/
+
+.footer{
+  background-color:#150201;
+}
