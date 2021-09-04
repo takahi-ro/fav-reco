@@ -21,6 +21,7 @@ CALLBACK_URL = "http://127.0.0.1:8000/favorites"
 def index():
     return render_template('index.html')
 
+
 @app.route("/result")
 def result():
     sample_isbn = "4041099153"
@@ -41,24 +42,9 @@ def login():
 
 @app.route('/favorites', methods=['GET'])
 def favorites():
-    verifier = request.args.get('oauth_verifier')
-    auth = tp.OAuthHandler(CONSUMER_API_KEY, CONSUMER_SECRET_API_KEY, CALLBACK_URL)
-    token = session['request_token']
-    session.pop('request_token', None)
-    auth.request_token = token
-    try:
-        auth.get_access_token(verifier)
-    except tp.TweepError as e:
-        print(vars(e))
-    api = tp.API(auth)
-    user_id = api.me().screen_name
-    fav_tweets = api.favorites(user_id, count=10)
-    url_pattern = re.compile("https://")
-    text_only_tweets = []
-    for tweet in fav_tweets:
-        if not(url_pattern.search(tweet.text)):
-            text_only_tweets.append(tweet)
-    return render_template('favorites.html', twitter_id=user_id, fav_tweets=text_only_tweets)
+    favorite_tweets = getFavorites()
+    return render_template('favorites.html', tweets=favorite_tweets)
+
 
 def getBookInfoFromISBN(isbn):
     APPLICATION_ID = "1095524729477042360"
@@ -82,6 +68,30 @@ def getBookInfoFromISBN(isbn):
             "rakuten_url": book_info["itemUrl"]
             }
     return results
+
+
+def getFavorites():
+    verifier = request.args.get('oauth_verifier')
+    auth = tp.OAuthHandler(CONSUMER_API_KEY, CONSUMER_SECRET_API_KEY, CALLBACK_URL)
+    token = session['request_token']
+    session.pop('request_token', None)
+    auth.request_token = token
+
+    try:
+        auth.get_access_token(verifier)
+    except tp.TweepError as e:
+        print(vars(e))
+
+    api = tp.API(auth)
+    user_id = api.me().screen_name
+    fav_tweets = api.favorites(user_id, count=10)
+    url_pattern = re.compile("https://")
+    text_only_tweets = []
+    for tweet in fav_tweets:
+        if not(url_pattern.search(tweet.text)):
+            text_only_tweets.append(tweet)
+    return text_only_tweets
+
 
 if __name__ == "__main__":
     app.run(debug=False, port=8000, threaded=True)
