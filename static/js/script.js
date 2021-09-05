@@ -20,7 +20,8 @@ var app = new Vue({
       isActive3: false,
       isActive4: false,
       topBody: true,
-      HowtoUse: false
+      HowtoUse: false,
+      bLogin:false
     };
   },
   methods: {
@@ -31,6 +32,7 @@ var app = new Vue({
       this.isActive4 = false;
       this.topBody = true;
       this.HowtoUse = false;
+      this.bLogin = false;
     },
     changeActive2: function () {
       this.isActive1 = false;
@@ -39,6 +41,7 @@ var app = new Vue({
       this.isActive4 = false;
       this.topBody = false;
       this.HowtoUse = true;
+      this.bLogin = false;
     },
     changeActive3: function () {
       this.isActive1 = false;
@@ -47,6 +50,7 @@ var app = new Vue({
       this.isActive4 = false;
       this.topBody = false;
       this.HowtoUse = false;
+      this.bLogin = true;
     },
     changeActive4: function () {
       this.isActive1 = false;
@@ -55,6 +59,7 @@ var app = new Vue({
       this.isActive4 = true;
       this.topBody = false;
       this.HowtoUse = false;
+      this.bLogin = false;
     }
 
   },

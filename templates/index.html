@@ -26,7 +26,7 @@
     </style>
     </head>
 <body>
-  <div id="appRoot">
+  <div id="appRoot" style = "user-select: none;">
     <nav class="navbar navbar-dark fixed-top navBar">
       <div class="container-fluid">
         <a class="navbar-brand" href="/"><img style="width:200px; height:auto;" src="../static/img/logo_white-04.png"
@@ -44,7 +44,7 @@
               <a class="nav-link" href="#">使い方</a>
             </li>
             <li class="nav-item" @click="changeActive3" :class="{active: isActive3}">
-              <a class="nav-link" href="/login">書店を利用する</a>
+              <a class="nav-link" href="#">書店を利用する</a>
             </li>
             <li class="nav-item" @click="changeActive4" :class="{active: isActive4}">
               <a class="nav-link" href="#">Github</a>
@@ -57,19 +57,23 @@
         </div>
       </div>
     </nav>
+    <div class="backgroundImg w-100">
+    </div>
+    <div class="catchCopy text-light p-4 h-50">
+      <p class='h3 text-start pl-1' style="line-height: 50px;">まるで書店をあてもなくぶらつくような<br>
+        そんな本との出会いを<br>
+        あなたに。</p>
+      <p class="text-right mt-5 pt-3">Produced by Doggo Doggo Inc.</p>
+    </div>
 
     <div v-if="topBody" class="topBody">
-      <div class="backgroundImg w-100">
-      </div>
-      <div class="catchCopy text-light p-4 h-50">
-        <p class='h3 text-start pl-1' style="line-height: 50px;">まるで書店をあてもなくぶらつくような<br>
-          そんな本との出会いを<br>
-          あなたに。</p>
-        <p class="text-right mt-5 pt-3">Produced by Doggo Doggo Inc.</p>
-      </div>
+      <div class="topContents container  my-0 h-100 mb-0 w-100 ">
 
-      <div class="topContents container  my-0 h-100 mb-0 w-100">
-        <div class="mt-5  pt-5">
+        <div class = "mt-5 w-50 headTitle" style = "background-color: #150210BF;">
+          <p class = "p-3 fw-light h1 fs-5 text-light align-middle">つぶやき書店について</p>
+        </div>
+
+        <div class="mt-4  pt-5">
           <h2 class="pb-3"><i class="fa-solid fa-book mr-3"
               style='font-family: "Font Awesome 5 Free";font-style:normal;font-weight: 900;content: "\1f4d4";'></i>つぶやき書店とは
           </h2>
@@ -99,36 +103,83 @@
       </div>
     </div>
 
-    <div class="HowtoUse" v-if="HowtoUse">
-      <h1 class="">使い方</h1>
-      <h1 class="">使い方</h1><h1 class="">使い方</h1><h1 class="">使い方</h1><h1 class="">使い方</h1><h1 class="">使い方</h1><h1 class="">使い方</h1><h1 class="">使い方</h1><h1 class="">使い方</h1><h1 class="">使い方</h1><h1 class="">使い方</h1><h1 class="">使い方</h1><h1 class="">使い方</h1><h1 class="">使い方</h1><h1 class="">使い方</h1><h1 class="">使い方</h1><h1 class="">使い方</h1>
+    <div class="HowtoUse container" v-if="HowtoUse">
+
+      <div class = "mt-5 w-25 headTitle" style = "background-color: #150210BF;">
+        <p class = "p-3 fw-light h1 fs-5 text-light align-middle">ご利用方法</p>
+      </div>
+
+      <div class="mt-4  pt-5">
+        <h2 class="pb-3">①普段使っているTwitterアカウントを用意
+        </h2>
+        <p>つぶやき書店は、個人のTwitterアカウントでいいねしたツイートを解析し、あなたにあった本をおすすめします。
+          <br>ですので、あなたが普段使用しているTwitterアカウントでのご利用を推奨します。
+        </p>
+      </div>
+
+      <div class="py-5 my-2">
+        <h2 class="pb-3">②実際に書店を利用する</h2>
+        <p>
+          ヘッダーのメニューにある <a @click="changeActive3" class = "text-primary text-decoration-none" href="#">「書店を利用する」</a>からTwitterログイン認証を行うと、あんたが過去にいいねしたツイートを分析し、潜在的な興味関心にあった本のおすすめ一覧ページを表示します。<br>
+          あなたのいいねの解析結果についての情報を見ることもできます。
+
+          
+        </p>
+      </div>
+
+      <div class="pb-5 mb-5">
+        <h2 class="pb-3">③運命の一冊に出会う</h2>
+        <p>おすすめページに並んだ本の表紙の中から、興味のある本を手に取ります（クリックします）。クリック後、本の詳細を確認することができます。また、「購入ページへ」のボタンから外部のECサイトに移り、本の購入を検討することもできます。<br><br>
+          使い方の説明はこのステップで終わりですが、ここからが、運命の一冊との出会いの始まりです。<br>
+      
+        </p>
+      </div>
       
     </div>
-   
-   
 
-  </div>
+    <div class="bLogin container" v-if="bLogin">
 
+      <div class = "mt-5 headTitle" style = "background-color: #150210BF; width: 35%;">
+        <p class = "p-3 fw-light h1 fs-5 text-light align-middle">書店を利用する</p>      
+      </div>
 
-
-
-  <div>
-    <a href="#" id="page-top">TOP</a>
-  </div>
-
-  <footer class="card-footer text-muted footer">
-    <img class="my-3 ml-2 h-auto" style="width:150px;" src="../static/img/logo_white-04.png" alt="ロゴ">
-    <ul style="list-style: none; " class="mb-5 text-light">
-      <a href="#" class="text-decoration-none text-light">
-        <li>- TOP</li>
+      <p class = "pt-5 mt-3">書店を利用するには、Twitterログインが必要です。下のボタンからログインしてください。</p>
+      
+      <a href="/login" class="text-decoration-none">
+        <button  class = "mt-2  btn text-light rounded-0" style = "background-color: #150210; margin-bottom:200px;" >Twitterログイン</button>
       </a>
-      <li>- 使い方</li>
-      <li>- 書店を利用する</li>
-      <li>- プライバシーポリシー</li>
-      <li>- リリースノート</li>
-    </ul>
-  </footer>
+      
 
+    </div>
+   
+    <div>
+      <a href="#" id="page-top">TOP</a>
+    </div>
+  
+    <footer class="card-footer text-muted footer">
+      <img class="my-3 ml-2 h-auto" style="width:150px;" src="../static/img/logo_white-04.png" alt="ロゴ">
+      <ul style="list-style: none; " class="mb-5 text-light list-group-flush">
+        <a href="#" @click="changeActive1" class="text-decoration-none text-light">
+          <li>- TOP(つぶやき書店とは） </li>
+        </a>
+        <a href="#" @click="changeActive2" class="text-decoration-none text-light">
+          <li>- 使い方</li>
+        </a>
+        <a href="#" @click="changeActive3" class="text-decoration-none text-light">
+          <li>- 書店を利用する</li>
+        </a>
+        <li>- プライバシーポリシー</li>
+        <li>- リリースノート</li>
+      </ul>
+    </footer>
+  
+
+  </div>
+
+
+
+
+ 
 
 
 
