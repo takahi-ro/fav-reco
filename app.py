@@ -29,14 +29,14 @@ def result():
             "陰翳礼讃": "谷崎潤一郎",
             "変身": "フランツ カフカ",
             "銀河鉄道の夜": "宮沢賢治",
-            "羅生門": "芥川龍之介",
-            "山椒大夫": "森鴎外"
+            "風の歌を聴け": "村上春樹",
+            "パプリカ": "筒井康隆"
             }
-    books_info = {}
+    books_info = []
     for k, v in sample_titles_and_authors.items():
         book_info = rakuten_api.getBookInfoFromTitleAndAuthor(k, v)
         if (book_info["isFound"]):
-            books_info[k] = book_info["image"]
+            books_info.append(book_info)
     return render_template('result.html', books_info=books_info)
 
 
