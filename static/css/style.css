@@ -5,6 +5,11 @@
      
   } */
 
+  body{
+    background-color: #F2EFE5;
+    /* font-family: "砧 丸明Yoshino StdN" ; */
+  }
+
   html {
     scroll-behavior: smooth;
 }
@@ -19,39 +24,19 @@ body {
 
 .backgroundImg {
   height: 100vh;
-  /* display: flex; */
-  align-items: center; /* 縦方向中央揃え */
-  justify-content: center; /* 横方向中央揃え */
-  flex-direction: column;
   background-image: url(../img/image_top.jpg);
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
   /* opacity:0.5; */
 }
-@media screen and (max-width: 320px) and (max-width: 480px) {
-  .backgroundImg {
-    width: 320px;
-    height: 480px;
-    display: flex;
-    align-items: center; /* 縦方向中央揃え */
-    justify-content: center; /* 横方向中央揃え */
-    flex-direction: column;
-    background-image: url(../img/tweetBookstore.jpg);
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-  }
-}
 
 .catchCopy{
   background-color: rgba(0,0,0,0.5);
   position:absolute;
   width:60%;
-  height:50%;
   top:35vh;
   left:3vw;
-  padding:30px;
 }
 
 
