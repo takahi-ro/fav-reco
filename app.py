@@ -1,5 +1,6 @@
 import os
 import re
+import time
 import tweepy as tp
 from libs import rakuten_api
 from dotenv import load_dotenv
@@ -37,6 +38,7 @@ def result():
         book_info = rakuten_api.getBookInfoFromTitleAndAuthor(k, v)
         if (book_info["isFound"]):
             books_info.append(book_info)
+        time.sleep(0.2)
     return render_template('result.html', books_info=books_info)
 
 
