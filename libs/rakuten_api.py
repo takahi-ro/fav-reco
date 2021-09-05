@@ -38,18 +38,32 @@ def getBookInfoFromTitleAndAuthor(title, author):
             "author": author,
             "size": 2,
             "hits": 1,
-            "sort": "sales"
             }
-    results_json = requests.get(api_url, params).json()
-    
-    book_info = results_json['Items'][0]['Item']
-    results = {
-            "title": book_info["title"],
-            "image": book_info["mediumImageUrl"],
-            "author": book_info["author"],
-            "caption": book_info["itemCaption"],
-            "sales_date": book_info["salesDate"],
-            "publisher": book_info["publisherName"],
-            "rakuten_url": book_info["itemUrl"]
-            }
+    results_json = {}
+    try:
+        results_json = requests.get(api_url, params).json()
+        book_info = results_json['Items'][0]['Item']
+        results = {
+                "isFound": True,
+                "title": book_info["title"],
+                "image": book_info["mediumImageUrl"],
+                "author": book_info["author"],
+                "caption": book_info["itemCaption"],
+                "sales_date": book_info["salesDate"],
+                "publisher": book_info["publisherName"],
+                "rakuten_url": book_info["itemUrl"]
+                }
+    except Exception as e:
+        print(e)
+        results = {
+                "isFound": False,
+                "title": "",
+                "image": "",
+                "author": "",
+                "caption": "",
+                "sales_date": "",
+                "publisher": "",
+                "rakuten_url": "" 
+                }
     return results
+    

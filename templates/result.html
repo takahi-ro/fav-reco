@@ -31,8 +31,16 @@
   <div id="appRoot">
     <!-- <app-header  :link1 = "appLink1" :link2 = "appLink2" :logo = "appTitle"  :link3 = "appLink3" :link4 = "appLink4"></app-header> -->
       <h1>recommended book</h1>
-        {% for title, image in books_info.items() %}
-            <img src={{ image }} alt={{ title }}>
+        {% for book_info in books_info %}
+          <h3>{{ book_info["title"] }}</h3>
+          <img src={{ book_info["image"] }} alt={{ book_info["title"] }}>
+          <ul>
+            <li>著者：{{ book_info["author"] }}</li>
+            <li>販売日：{{ book_info["sales_date"] }}</li>
+            <li>出版社：{{ book_info["sales_date"] }}</li>
+          </ul>
+          <p>{{ book_info["caption"] }}</p>
+          <a href={{ book_info["rakuten_url"] }}>楽天で購入</a>
         {% endfor %}
   </div>
 
@@ -40,15 +48,15 @@
   
   <!-- 無駄にVue.jsの練習がてらVueで書く -->
   <script type='text/x-template' id='header'>
-   <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-    <!-- <nav class="navbar navbar-dark fixed-top bg-dark"> -->
+   <!-- <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark"> -->
+    <nav class="navbar navbar-dark fixed-top bg-dark">
       <div class="container-fluid">
         <a class="navbar-brand" href="/">[[logo]]</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarCollapse">
-          <ul class="navbar-nav ml-auto mb-2 mb-md-0">
+          <ul class="navbar-nav me-auto mb-2 mb-md-0">
             <li class="nav-item active">
               <a class="nav-link" aria-current="page" href="/">[[link1]]</a>
             </li>
