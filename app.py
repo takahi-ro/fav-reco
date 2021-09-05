@@ -35,7 +35,8 @@ def result():
     books_info = {}
     for k, v in sample_titles_and_authors.items():
         book_info = rakuten_api.getBookInfoFromTitleAndAuthor(k, v)
-        books_info[k] = book_info["image"]
+        if (book_info["isFound"]):
+            books_info[k] = book_info["image"]
     return render_template('result.html', books_info=books_info)
 
 
