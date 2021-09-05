@@ -1,7 +1,7 @@
 import os
 import re
 import tweepy as tp
-from rakuten_books_api import getBookInfoFromISBN
+from libs import rakuten_api
 from dotenv import load_dotenv
 from flask import Flask, render_template, request, session, redirect
 app = Flask(__name__)
@@ -24,9 +24,19 @@ def index():
 
 @app.route("/result")
 def result():
-    sample_isbn = "4041099153"
-    book_info = getBookInfoFromISBN(sample_isbn)
-    return render_template('result.html', book_info=book_info)
+    sample_titles_and_authors = {
+            "人間失格": "太宰治",
+            "陰翳礼讃": "谷崎潤一郎",
+            "変身": "フランツ カフカ",
+            "銀河鉄道の夜": "宮沢賢治",
+            "羅生門": "芥川龍之介",
+            "山椒大夫": "森鴎外"
+            }
+    books_info = {}
+    for k, v in sample_titles_and_authors.items():
+        book_info = rakuten_api.getBookInfoFromTitleAndAuthor(k, v)
+        books_info[k] = book_info["image"]
+    return render_template('result.html', books_info=books_info)
 
 
 @app.route('/login', methods=['GET'])

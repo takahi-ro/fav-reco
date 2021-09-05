@@ -36,7 +36,7 @@ def getBookInfoFromTitleAndAuthor(title, author):
             "applicationId": APPLICATION_ID,
             "title": title,
             "author": author,
-            "size": 1,
+            "size": 2,
             "hits": 1,
             "sort": "sales"
             }

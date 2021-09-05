@@ -31,12 +31,9 @@
   <div id="appRoot">
     <!-- <app-header  :link1 = "appLink1" :link2 = "appLink2" :logo = "appTitle"  :link3 = "appLink3" :link4 = "appLink4"></app-header> -->
       <h1>recommended book</h1>
-      <h2>{{ book_info.title }}</h2>
-      <img src={{ book_info.image }} alt="book image">
-      <p>{{ book_info.caption }}</p>
-      <p>発売日：{{ book_info.sales_date }}</p>
-      <p>出版社：{{ book_info.publisher }}</p>
-      <a href={{ item_url }}>楽天で購入</a>
+        {% for title, image in books_info.items() %}
+            <img src={{ image }} alt={{ title }}>
+        {% endfor %}
   </div>
 
 
