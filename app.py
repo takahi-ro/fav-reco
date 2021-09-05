@@ -1,7 +1,7 @@
 import os
 import re
-import requests
 import tweepy as tp
+from rakuten_books_api import getBookInfoFromISBN
 from dotenv import load_dotenv
 from flask import Flask, render_template, request, session, redirect
 app = Flask(__name__)
@@ -13,8 +13,8 @@ CONSUMER_SECRET_API_KEY = os.environ.get("CONSUMER_SECRET_API_KEY")
 ACCESS_TOKEN = os.environ.get("ACCESS_TOKEN")
 ACCESS_TOKEN_SECRET = os.environ.get("ACCESS_TOKEN_SECRET")
 
-# CALLBACK_URL = "http://127.0.0.1:8000/favorites"
-CALLBACK_URL="https://young-dawn-36523.herokuapp.com/favorites"
+CALLBACK_URL = "http://127.0.0.1:8000/favorites"
+# CALLBACK_URL="https://young-dawn-36523.herokuapp.com/favorites"
 
 
 @app.route("/")
@@ -44,31 +44,6 @@ def login():
 def favorites():
     favorite_tweets = getFavorites()
     return render_template('favorites.html', tweets=favorite_tweets)
-
-
-def getBookInfoFromISBN(isbn):
-    APPLICATION_ID = "1095524729477042360"
-    api_url = "https://app.rakuten.co.jp/services/api/BooksBook/Search/20170404"
-    params = {
-            "format": "json",
-            "applicationId": APPLICATION_ID,
-            "isbn": isbn,
-            "hits": 1,
-            "sort": "sales"
-            }
-    results_json = requests.get(api_url, params).json()
-    book_info = results_json['Items'][0]['Item']
-    results = {
-            "title": book_info["title"],
-            "image": book_info["mediumImageUrl"],
-            "author": book_info["author"],
-            "caption": book_info["itemCaption"],
-            "sales_date": book_info["salesDate"],
-            "publisher": book_info["publisherName"],
-            "rakuten_url": book_info["itemUrl"]
-            }
-    return results
-
 
 def getFavorites():
     verifier = request.args.get('oauth_verifier')

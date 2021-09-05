@@ -14,12 +14,15 @@
     scroll-behavior: smooth;
 }
 
+body {
+  background-color:#F2EFE5;
+}
+
 .navBar{
   background-color:#150201;
 }
 
 .backgroundImg {
-  width: 100%;
   height: 100vh;
   background-image: url(../img/image_top.jpg);
   background-size: cover;
