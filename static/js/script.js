@@ -21,7 +21,8 @@ var app = new Vue({
       isActive4: false,
       topBody: true,
       HowtoUse: false,
-      bLogin:false
+      bLogin: false,
+      hoverFlag: false
     };
   },
   methods: {
@@ -60,6 +61,12 @@ var app = new Vue({
       this.topBody = false;
       this.HowtoUse = false;
       this.bLogin = false;
+    },
+    mouseOverAction: function () {
+      this.hoverFlag = true
+    },
+    mouseLeaveAction: function () {
+      this.hoverFlag = false
     }
 
   },

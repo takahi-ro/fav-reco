@@ -4,3 +4,9 @@ body {
     padding-top: 4.5rem;
     scroll-behavior: smooth;
   }
+
+  .fuwafuwa{
+    box-shadow: 10px 10px 10px rgba(0,0,0,0.5);
+    transform: translateY(-10px);
+    transition-duration: 0.5s;
+  }

@@ -28,20 +28,26 @@
 </head>
 
 <body>
-  <div id="appRoot">
+  <div id="appRoot" class ="container ">
     <!-- <app-header  :link1 = "appLink1" :link2 = "appLink2" :logo = "appTitle"  :link3 = "appLink3" :link4 = "appLink4"></app-header> -->
       <h1>recommended book</h1>
-        {% for book_info in books_info %}
-          <h3>{{ book_info["title"] }}</h3>
-          <img src={{ book_info["image"] }} alt={{ book_info["title"] }}>
-          <ul>
-            <li>著者：{{ book_info["author"] }}</li>
-            <li>販売日：{{ book_info["sales_date"] }}</li>
-            <li>出版社：{{ book_info["sales_date"] }}</li>
-          </ul>
-          <p>{{ book_info["caption"] }}</p>
-          <a href={{ book_info["rakuten_url"] }}>楽天で購入</a>
-        {% endfor %}
+       
+       
+          <img :class = "{fuwafuwa: hoverFlag}" @mouseover="mouseOverAction" @mouseleave="mouseLeaveAction" src={{ book_info["image"] }} alt={{ book_info["title"] }}>
+          <div v-if="hoverFlag" class = "container">
+            <p>{{ book_info["title"] }}</p>
+            <ul>
+              <li>著者：{{book_info["author"] }}</li>
+              <li>販売日：{{ book_info["sales_date"] }}</li>
+              <li>出版社：{{ book_info["sales_date"] }}</li>
+            </ul>
+            <p>{{ book_info["caption"] }}</p>
+            <a href={{ book_info["rakuten_""url"] }}>楽天で購入</a>
+          </div>
+         
+         
+ <!-- {% for book_info in books_info %} -->
+        <!-- {% endfor %} -->
   </div>
 
 

@@ -25,21 +25,26 @@ def index():
 
 @app.route("/result")
 def result():
-    sample_titles_and_authors = {
-            "人間失格": "太宰治",
-            "陰翳礼讃": "谷崎潤一郎",
-            "変身": "フランツ カフカ",
-            "銀河鉄道の夜": "宮沢賢治",
-            "風の歌を聴け": "村上春樹",
-            "パプリカ": "筒井康隆"
-            }
-    books_info = []
-    for k, v in sample_titles_and_authors.items():
-        book_info = rakuten_api.getBookInfoFromTitleAndAuthor(k, v)
-        if (book_info["isFound"]):
-            books_info.append(book_info)
-        time.sleep(0.2)
-    return render_template('result.html', books_info=books_info)
+    book_info = rakuten_api.getBookInfoFromTitleAndAuthor("人間失格","太宰治")
+    return render_template('result.html', book_info=book_info)
+
+# @app.route("/result")
+# def result():
+#     sample_titles_and_authors = {
+#             "人間失格": "太宰治",
+#             "陰翳礼讃": "谷崎潤一郎",
+#             "変身": "フランツ カフカ",
+#             "銀河鉄道の夜": "宮沢賢治",
+#             "風の歌を聴け": "村上春樹",
+#             "パプリカ": "筒井康隆"
+#             }
+#     books_info = []
+#     for k, v in sample_titles_and_authors.items():
+#         book_info = rakuten_api.getBookInfoFromTitleAndAuthor(k, v)
+#         if (book_info["isFound"]):
+#             books_info.append(book_info)
+#         time.sleep(0.2)
+#     return render_template('result.html', books_info=books_info)
 
 
 @app.route('/login', methods=['GET'])
