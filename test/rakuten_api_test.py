@@ -1,7 +1,6 @@
 import requests
 
 
-
 def getBookInfoFromISBN(isbn):
     APPLICATION_ID = "1095524729477042360"
     api_url = "https://app.rakuten.co.jp/services/api/BooksBook/Search/20170404"

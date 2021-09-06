@@ -14,7 +14,7 @@ CONSUMER_SECRET_API_KEY = os.environ.get("CONSUMER_SECRET_API_KEY")
 ACCESS_TOKEN = os.environ.get("ACCESS_TOKEN")
 ACCESS_TOKEN_SECRET = os.environ.get("ACCESS_TOKEN_SECRET")
 
-CALLBACK_URL = "http://127.0.0.1:8000/favorites"
+CALLBACK_URL = "http://127.0.0.1:8000/result"
 # CALLBACK_URL="https://young-dawn-36523.herokuapp.com/favorites"
 
 
@@ -36,7 +36,7 @@ def result():
     books_info = []
     for k, v in sample_titles_and_authors.items():
         book_info = rakuten_api.getBookInfoFromTitleAndAuthor(k, v)
-        if (book_info["isFound"]):
+        if (book_info):
             books_info.append(book_info)
         time.sleep(0.2)
     return render_template('result.html', books_info=books_info)
