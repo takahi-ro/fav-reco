@@ -43,7 +43,7 @@
         <div class="collapse navbar-collapse" id="navbarCollapse">
           <ul class="navbar-nav ml-auto mb-2 mb-md-0">
             <li class="nav-item " @click="changeActive1" :class="{active: isActive1}">
-              <a class="nav-link" aria-current="page" href="#">TOP(つぶやき書店とは)</a>
+              <router-link to="/" class = "nav-link">TOP(つぶやき書店とは)</a>
             </li>
             <li class="nav-item" @click="changeActive2" :class="{active: isActive2}">
               <router-link to="/usage" class = "nav-link">使い方</router-link>
@@ -115,13 +115,13 @@
    
 
     <div>
-      <a href="#" id="page-top">TOP</a>
+      <a href="/" id="page-top">TOP</a>
     </div>
 
     <footer class="card-footer text-muted footer">
       <img class="my-3 ml-2 h-auto" style="width:150px;" src="../static/img/logo_white-04.png" alt="ロゴ">
       <ul style="list-style: none; " class="mb-5 text-light list-group-flush">
-        <a href="#" class="text-decoration-none text-light">
+        <a href="/" class="text-decoration-none text-light">
           <li  @click="changeActive1">- TOP(つぶやき書店とは） </li>
         </a>
         <router-link to="/usage" class="text-decoration-none text-light">

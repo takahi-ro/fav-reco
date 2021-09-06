@@ -9,7 +9,6 @@ const login = {
   props: ['uasge','login']
 }
 
-
 const routes = [
   { path: '/usage', component: usage },
   { path: '/login', component: login }
@@ -17,12 +16,9 @@ const routes = [
 
 
 const router = new VueRouter({
+  mode: 'history',
   routes // `routes: routes` の短縮表記
 })
-
-
-
-
 
 
 var app = new Vue({
@@ -85,5 +81,3 @@ var app = new Vue({
   },
   delimiters: ['[[', ']]']
 })
-
-
