@@ -34,8 +34,8 @@ def result():
             "パプリカ": "筒井康隆"
             }
     books_info = []
-    for k, v in sample_titles_and_authors.items():
-        book_info = rakuten_api.getBookInfoFromTitleAndAuthor(k, v)
+    for book_title, author in sample_titles_and_authors.items():
+        book_info = rakuten_api.getBookInfoFromTitleAndAuthor(book_title, author)
         if (book_info["isFound"]):
             books_info.append(book_info)
         time.sleep(0.2)
@@ -57,6 +57,7 @@ def login():
 def favorites():
     favorite_tweets = getFavorites()
     return render_template('favorites.html', tweets=favorite_tweets)
+
 
 def getFavorites():
     verifier = request.args.get('oauth_verifier')
