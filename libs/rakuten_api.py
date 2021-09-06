@@ -30,7 +30,7 @@ def getBookInfoFromISBN(isbn):
 
 # ISBNを引数に渡すと，その本に関する情報を辞書で返す
 def getBookInfoFromTitleAndAuthor(title, author):
-    api_url = "https://app.rakuten.co.jp/services/api/BooksBook/Search/20170404"
+    rakuten_books_api_url = "https://app.rakuten.co.jp/services/api/BooksBook/Search/20170404"
     params = {
             "format": "json",
             "applicationId": APPLICATION_ID,
@@ -41,7 +41,7 @@ def getBookInfoFromTitleAndAuthor(title, author):
             }
     results_json = {}
     try:
-        results_json = requests.get(api_url, params).json()
+        results_json = requests.get(rakuten_books_api_url, params).json()
         book_info = results_json['Items'][0]['Item']
         results = {
                 "isFound": True,
