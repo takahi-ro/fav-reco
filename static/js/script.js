@@ -1,13 +1,29 @@
 'use strict'
-// Vue.component('app-header',{
-//     template: '#header',
-//     props : ['link1','link2','link3','link4','logo'],
-//     delimiters: ['[[', ']]']
-//   })
+
+const usage = { 
+  template: '#usage',
+  props:['usage','login']
+}
+const login = { 
+  template: '#login',
+  props: ['uasge','login']
+}
+
+const routes = [
+  { path: '/usage', component: usage },
+  { path: '/login', component: login }
+]
+
+
+const router = new VueRouter({
+  mode: 'history',
+  routes // `routes: routes` の短縮表記
+})
 
 
 var app = new Vue({
   el: '#appRoot',
+  router,
   data() {
     return {
       //  appTitle: 'つぶやき書店',
@@ -21,8 +37,7 @@ var app = new Vue({
       isActive4: false,
       topBody: true,
       HowtoUse: false,
-      bLogin: false,
-      hoverFlag: false
+      bLogin:false
     };
   },
   methods: {
@@ -61,12 +76,6 @@ var app = new Vue({
       this.topBody = false;
       this.HowtoUse = false;
       this.bLogin = false;
-    },
-    mouseOverAction: function () {
-      this.hoverFlag = true
-    },
-    mouseLeaveAction: function () {
-      this.hoverFlag = false
     }
 
   },

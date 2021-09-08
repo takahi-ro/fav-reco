@@ -28,7 +28,6 @@ body {
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  /* opacity:0.5; */
 }
 
 .catchCopy{
@@ -39,6 +38,15 @@ body {
   left:3vw;
 }
 
+/* .catchCopy{
+  background-color: rgba(0,0,0,0.5);
+  position:absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -webkit-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+} */
 
 
 /***追従するトップへ戻るボタン***/
