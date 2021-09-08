@@ -37,7 +37,7 @@ var app = new Vue({
       isActive4: false,
       topBody: true,
       HowtoUse: false,
-      bLogin:false,
+      // bLogin:false,
       navFlag:false
     };
   },
@@ -49,7 +49,7 @@ var app = new Vue({
       this.isActive4 = false;
       this.topBody = true;
       this.HowtoUse = false;
-      this.bLogin = false;
+      // this.bLogin = false;
       this.navFlag = false;
     },
     changeActive2: function () {
@@ -59,19 +59,19 @@ var app = new Vue({
       this.isActive4 = false;
       this.topBody = false;
       this.HowtoUse = true;
-      this.bLogin = false;
+      // this.bLogin = false;
       this.navFlag = false;
     },
-    changeActive3: function () {
-      this.isActive1 = false;
-      this.isActive2 = false;
-      this.isActive3 = true;
-      this.isActive4 = false;
-      this.topBody = false;
-      this.HowtoUse = false;
-      this.bLogin = true;
-      this.navFlag = false;
-    },
+    // changeActive3: function () {
+    //   this.isActive1 = false;
+    //   this.isActive2 = false;
+    //   this.isActive3 = true;
+    //   this.isActive4 = false;
+    //   this.topBody = false;
+    //   this.HowtoUse = false;
+    //   this.bLogin = true;
+    //   this.navFlag = false;
+    // },
     changeActive4: function () {
       this.isActive1 = false;
       this.isActive2 = false;
@@ -79,7 +79,7 @@ var app = new Vue({
       this.isActive4 = true;
       this.topBody = false;
       this.HowtoUse = false;
-      this.bLogin = false;
+      // this.bLogin = false;
       this.navFlag = false;
     },
     navButton: function(){

@@ -5,21 +5,72 @@
      
   } */
 
-  body{
-    background-color: #F2EFE5;
-    /* font-family: "砧 丸明Yoshino StdN" ; */
-  }
+body {
+  background-color: #f2efe5;
+  /* font-family: "砧 丸明Yoshino StdN" ; */
+}
 
-  html {
-    scroll-behavior: smooth;
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  background-color:#F2EFE5;
+  background-color: #f2efe5;
 }
 
-.navBar{
-  background-color:#150201;
+.navBar {
+  background-color: #150201;
+}
+
+.catchCopy {
+  background-color: rgba(0, 0, 0, 0.5);
+  position: absolute;
+  width: 60%;
+  top: 35vh;
+  left: 3vw;
+}
+
+/* レスポンシブデザイン */
+@media (max-width: 1199px) {
+  .catchCopy {
+    background-color: rgba(0, 0, 0, 0.5);
+    position: absolute;
+    width: 60%;
+    top: 35vh;
+    left: 3vw;
+  }
+}
+
+@media (max-width: 991px) {
+  .catchCopy {
+    background-color: rgba(0, 0, 0, 0.5);
+    position: absolute;
+    width: 60%;
+    top: 35vh;
+    left: 3vw;
+  }
+}
+
+@media (max-width: 767px) {
+  .catchCopy {
+    background-color: rgba(0, 0, 0, 0.5);
+    position: absolute;
+    width: 60%;
+    top: 35vh;
+    left: 3vw;
+  }
+}
+
+@media (max-width: 575px) {
+  .catchCopy {
+    background-color: rgba(0, 0, 0, 0.5);
+    position: absolute;
+    top: 55%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    
+  }
 }
 
 .backgroundImg {
@@ -29,14 +80,6 @@ body {
   background-position: center;
   background-repeat: no-repeat;
   /* opacity:0.5; */
-}
-
-.catchCopy{
-  background-color: rgba(0,0,0,0.5);
-  position:absolute;
-  width:60%;
-  top:35vh;
-  left:3vw;
 }
 
 
@@ -69,6 +112,6 @@ body {
 }
 /***トップへ戻るボタンここまで***/
 
-.footer{
-  background-color:#150201;
+.footer {
+  background-color: #150201;
 }
