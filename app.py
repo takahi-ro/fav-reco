@@ -2,7 +2,7 @@ import os
 import re
 import time
 import tweepy as tp
-from libs import rakuten_api
+from libs import rakuten_api, recommend
 from dotenv import load_dotenv
 from flask import Flask, render_template, request, session, redirect
 app = Flask(__name__)
@@ -14,8 +14,12 @@ CONSUMER_SECRET_API_KEY = os.environ.get("CONSUMER_SECRET_API_KEY")
 ACCESS_TOKEN = os.environ.get("ACCESS_TOKEN")
 ACCESS_TOKEN_SECRET = os.environ.get("ACCESS_TOKEN_SECRET")
 
-CALLBACK_URL = "http://127.0.0.1:8000/favorites"
+CALLBACK_URL = "http://127.0.0.1:8000/result"
 # CALLBACK_URL="https://young-dawn-36523.herokuapp.com/favorites"
+
+path_to_dict = "./libs/data/mecab/dic/ipadic"
+path_to_d2v_model = "./libs/data/Doc2Vec.model"
+path_to_aozora = "./libs/data/aozora.csv"
 
 
 @app.route("/")
@@ -23,8 +27,8 @@ def index():
     return render_template('index.html')
 
 
-@app.route("/result")
-def result():
+@app.route("/test")
+def test():
     sample_titles_and_authors = {
             "人間失格": "太宰治",
             "陰翳礼讃": "谷崎潤一郎",
@@ -36,7 +40,34 @@ def result():
     books_info = []
     for book_title, author in sample_titles_and_authors.items():
         book_info = rakuten_api.getBookInfoFromTitleAndAuthor(book_title, author)
-        if (book_info["isFound"]):
+        if (book_info):
+            books_info.append(book_info)
+        time.sleep(0.2)
+    return render_template('result.html', books_info=books_info)
+
+
+@app.route("/result")
+def result():
+    verifier = request.args.get('oauth_verifier')
+    auth = tp.OAuthHandler(CONSUMER_API_KEY, CONSUMER_SECRET_API_KEY)
+    token = session['request_token']
+    session.pop('request_token', None)
+    auth.request_token = token
+
+    try:
+        auth.get_access_token(verifier)
+    except tp.TweepError as e:
+        print(vars(e))
+
+    api = tp.API(auth)
+    user_id = api.me().screen_name
+    results = recommend.getMostSimilarBookTitlesFromTweet(user_id, path_to_dict, path_to_d2v_model, path_to_aozora)
+    books_info = []
+    for item in results:
+        title = item[1]
+        author = item[2]
+        book_info = rakuten_api.getBookInfoFromTitleAndAuthor(title, author)
+        if (book_info):
             books_info.append(book_info)
         time.sleep(0.2)
     return render_template('result.html', books_info=books_info)
@@ -53,10 +84,13 @@ def login():
     return redirect(redirect_url)
 
 
+"""
 @app.route('/favorites', methods=['GET'])
 def favorites():
     favorite_tweets = getFavorites()
     return render_template('favorites.html', tweets=favorite_tweets)
+"""
+
 
 
 def getFavorites():
