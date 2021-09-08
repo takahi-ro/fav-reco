@@ -7,12 +7,12 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>つぶやき書店</title>
   <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14"></script>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
   <link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" rel="stylesheet">
   <link rel="stylesheet" href="../static/css/style.css">
   <!-- Vue routerのCDN -->
   <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
-
   <style>
     .bd-placeholder-img {
       font-size: 1.125rem;
@@ -36,30 +36,30 @@
       <div class="container-fluid">
         <a class="navbar-brand" href="/"><img style="width:200px; height:auto;" src="../static/img/logo_white-04.png"
             alt="ロゴ"></a>
-        <button class="navbar-toggler" type="button"  
-          aria-controls="navbarCollapse"  aria-label="Toggle navigation" @click="navButton" >
+        <button class="navbar-toggler" type="button" aria-controls="navbarCollapse" aria-label="Toggle navigation"
+          @click="navButton">
           <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse" :class = "{show: navFlag}" id="navbarCollapse">
-          <ul class="navbar-nav ms-auto mb-2 mb-md-0">
-            <li class="nav-item " @click="changeActive1" :class="{active: isActive1}">
-              <router-link to="/" class = "nav-link">TOP(つぶやき書店とは)</a>
-            </li>
-            <li class="nav-item" @click="changeActive2" :class="{active: isActive2}">
-              <router-link to="/usage" class = "nav-link">使い方</router-link>
-            </li>
-            <li class="nav-item" @click="changeActive3" :class="{active: isActive3}">
-              <router-link to="/login" class = "nav-link">書店を利用する</router-link>
-            </li>
-            <li class="nav-item" @click="changeActive4" :class="{active: isActive4}">
-              <a class="nav-link" href="#">Github</a>
-            </li>
-          </ul>
-          <!-- <form class="d-flex">
-                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-success" type="submit">Search</button>
-              </form> -->
-        </div>
+          <div class="collapse navbar-collapse" :class="{show: navFlag}" id="navbarCollapse">
+            <ul class="navbar-nav ms-auto mb-2 mb-md-0">
+              <li class="nav-item " @click="changeActive1" :class="{active: isActive1}">
+                <router-link to="/" class="nav-link">TOP(つぶやき書店とは)</a>
+              </li>
+              <li class="nav-item" @click="changeActive2" :class="{active: isActive2}">
+                <router-link to="/usage" class="nav-link">使い方</router-link>
+              </li>
+              <li class="nav-item"  :class="{active: isActive3}">
+                <a href="/login"  class="nav-link">書店を利用する</a>
+              </li>
+              <li class="nav-item" @click="changeActive4" :class="{active: isActive4}">
+                <a class="nav-link" href="#">Github</a>
+              </li>
+            </ul>
+            <!-- <form class="d-flex">
+                  <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                  <button class="btn btn-outline-success" type="submit">Search</button>
+                </form> -->
+          </div>
       </div>
     </nav>
     <div class="backgroundImg w-100">
@@ -74,7 +74,7 @@
     <div v-if="topBody" class="topBody">
       <div class="topContents container  my-0 h-100 mb-0 w-100 ">
 
-        <div class="mt-5 w-50  headTitle" style="background-color: #150210BF;">
+        <div class="mt-5 w-75 text-center  mx-auto headTitle" style="background-color: #150210BF;">
           <p class="p-3 fs-1 text-light align-middle ">つぶやき書店について</p>
         </div>
 
@@ -110,9 +110,9 @@
       </div>
     </div>
 
-    <router-view :usage = "HowtoUse" :login = "bLogin"></router-view>    
+    <router-view :usage="HowtoUse"></router-view>
 
-   
+
 
     <div>
       <a href="#" id="page-top">TOP</a>
@@ -122,14 +122,14 @@
       <img class="my-3 ms-2 h-auto" style="width:150px;" src="../static/img/logo_white-04.png" alt="ロゴ">
       <ul style="list-style: none; " class="mb-5 text-light list-group-flush">
         <a href="/" class="text-decoration-none text-light">
-          <li  @click="changeActive1">- TOP(つぶやき書店とは） </li>
+          <li @click="changeActive1">- TOP(つぶやき書店とは） </li>
         </a>
         <router-link to="/usage" class="text-decoration-none text-light">
-          <li  @click="changeActive2">- 使い方</li>
+          <li @click="changeActive2">- 使い方</li>
         </router-link>
-        <router-link to="/login"class="text-decoration-none text-light">
-          <li  @click="changeActive3" >- 書店を利用する</li>
-        </router-link>
+        <a href="/login" class="text-decoration-none text-light">
+          <li >- 書店を利用する</li>
+        </a>
         <!-- <li>- プライバシーポリシー</li> -->
         <li>- リリースノート</li>
       </ul>
@@ -138,7 +138,7 @@
 
   <script type='text/x-template' id='usage'>
    <div class="HowtoUse container"  v-if="usage">
-      <div class="mt-5 w-25 headTitle" style="background-color: #150210BF;">
+      <div class="mt-5 w-75 text-center headTitle mx-auto" style="background-color: #150210BF;">
         <p class="p-3 fs-1 text-light align-middle">ご利用方法</p>
       </div>
 
@@ -153,7 +153,7 @@
       <div class="py-5 my-2">
         <h2 class="pb-3">②実際に書店を利用する</h2>
         <p>
-          ヘッダーのメニューにある「書店を利用する」からTwitterログイン認証を行うと、あんたが過去にいいねしたツイートを分析し、潜在的な興味関心にあった本のおすすめ一覧ページを表示します。<br>
+          ヘッダーのメニューにある「書店を利用する」からTwitterログイン認証を行うと、あんたが過去にいいねしたツイートを分析し、潜在的な興味関心にあった本のおすすめ一覧ページを表示します。下にあるTwitterログインボタンからも利用可能です。<br>
           あなたのいいねの解析結果についての情報を見ることもできます。
 
 
@@ -165,13 +165,20 @@
         <p>
           おすすめページに並んだ本の表紙の中から、興味のある本を手に取ります（クリックします）。クリック後、本の詳細を確認することができます。また、「購入ページへ」のボタンから外部のECサイトに移り、本の購入を検討することもできます。<br><br>
           使い方の説明はこのステップで終わりですが、ここからが、運命の一冊との出会いの始まりです。<br>
-
+          以下のTwitterログインから、早速利用を開始しましょう！    
         </p>
+        
+          <button class="d-block mt-5 btn btn-lg w-50   mx-auto mx-sm-0"
+            style="background-color: #150210;">
+            <a href="/login" class="text-decoration-none text-light">Twitterログイン</a>
+          
+          </button>
+        
       </div>
 
     </div>
   </script>
-  <script type='text/x-template' id='login'>
+  <!-- <script type='text/x-template' id='login'>
     <div class="bLogin container"  v-if="login">
 
       <div class="mt-5 headTitle" style="background-color: #150210BF; width: 35%;">
@@ -187,7 +194,7 @@
     </div>
 
 
-  </script>
+  </script> -->
 
   <script src="../static/js/script.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"
