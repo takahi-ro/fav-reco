@@ -37,7 +37,8 @@ var app = new Vue({
       isActive4: false,
       topBody: true,
       HowtoUse: false,
-      bLogin:false
+      bLogin:false,
+      navFlag:false
     };
   },
   methods: {
@@ -49,6 +50,7 @@ var app = new Vue({
       this.topBody = true;
       this.HowtoUse = false;
       this.bLogin = false;
+      this.navFlag = false;
     },
     changeActive2: function () {
       this.isActive1 = false;
@@ -58,6 +60,7 @@ var app = new Vue({
       this.topBody = false;
       this.HowtoUse = true;
       this.bLogin = false;
+      this.navFlag = false;
     },
     changeActive3: function () {
       this.isActive1 = false;
@@ -67,6 +70,7 @@ var app = new Vue({
       this.topBody = false;
       this.HowtoUse = false;
       this.bLogin = true;
+      this.navFlag = false;
     },
     changeActive4: function () {
       this.isActive1 = false;
@@ -76,6 +80,10 @@ var app = new Vue({
       this.topBody = false;
       this.HowtoUse = false;
       this.bLogin = false;
+      this.navFlag = false;
+    },
+    navButton: function(){
+      this.navFlag = !this.navFlag;
     }
 
   },
