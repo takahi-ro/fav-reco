@@ -11,6 +11,8 @@ ACCESS_TOKEN = os.environ.get("ACCESS_TOKEN")
 ACCESS_TOKEN_SECRET = os.environ.get("ACCESS_TOKEN_SECRET")
 CALLBACK_URL = "http://127.0.0.1:8000/favorites"
 # CALLBACK_URL="https://young-dawn-36523.herokuapp.com/favorites"
+
+
 """
  検索したい単語と取ってきたいTweet数(デフォルトは10)を引数に渡すと，
  検索したい単語を含んだtweetをリストにして返す
