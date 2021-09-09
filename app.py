@@ -16,7 +16,7 @@ ACCESS_TOKEN = os.environ.get("ACCESS_TOKEN")
 ACCESS_TOKEN_SECRET = os.environ.get("ACCESS_TOKEN_SECRET")
 
 # CALLBACK_URL = "http://127.0.0.1:8000/result"
-CALLBACK_URL="https://tsubuyaki-syoten.herokuapp.com/result"
+CALLBACK_URL = "http://tsubuyaki-syoten.herokuapp.com/result"
 
 path_to_dict = "./libs/data/mecab/dic/ipadic"
 path_to_d2v_model = "./libs/data/Doc2Vec.model"
