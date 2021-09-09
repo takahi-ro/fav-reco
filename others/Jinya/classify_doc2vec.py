@@ -8,12 +8,12 @@ import numpy as np
 import matplotlib.pyplot as plt
 import pandas as pd
 
-df = pd.read_csv('/Users/jinya/Desktop/fav-reco/test/Jinya/data/aozora.csv')
+df = pd.read_csv('/Users/jinya/Desktop/fav-reco/textdata.csv')
 titles = df["title"]
 
 # モデルを読み込む
 # モデルは絶対パスで指定してください
-m = Doc2Vec.load('/Users/jinya/Desktop/fav-reco/test/Jinya/models/Doc2Vec.model')
+m = Doc2Vec.load('/Users/jinya/Desktop/fav-reco/new_doc2vec.model')
 
 # ベクトルをリストに格納
 vectors_list = [m.docvecs[n] for n in range(len(m.docvecs))]
@@ -33,19 +33,22 @@ kmeans_model.fit(vectors_list)
 
 # クラスタリングデータにラベル付け
 labels = kmeans_model.labels_
+print(labels)
 
 # ラベルとドキュメント番号の辞書づくり
 cluster_to_docs = defaultdict(list)
 for cluster_id, doc_num in zip(labels, doc_nums):
     cluster_to_docs[cluster_id].append(titles[doc_num])
 
+print(cluster_to_docs)
 # クラスター出力
 for docs in cluster_to_docs.values():
-    print(docs)
+    print()
+    # print(docs)
 
 # どんなクラスタリングになったか、棒グラフ出力しますよ
 
-# x軸ラベル
+# x軸ラベ
 x_label_name = []
 for i in range(n_clusters):
     x_label_name.append("Cluster"+str(i))
