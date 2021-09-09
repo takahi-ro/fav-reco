@@ -40,7 +40,7 @@ def test():
             }
     books_info = []
     for book_title, author in sample_titles_and_authors.items():
-        book_info = rakuten_api.getBookInfoFromTitleAndAuthor(book_title, author)
+        book_info = get_book_info.getBookInfoFromTitleAndAuthor(book_title, author)
         if (book_info):
             books_info.append(book_info)
         time.sleep(0.2)
