@@ -69,32 +69,32 @@
       <p class="text-center mt-5 pt-2">Produced by Doggo Doggo Inc.</p>
 
     </div>
-    <div class="container my-5 py-5">
+    <div class="container mt-5 py-5 Contents">
       <div class="row w-75 mx-auto text-center">
         <h1 class = "d-block mb-4">あなたにおすすめの本はこちらです</h1>
         <!-- {% set ns = namespace(cnt = 1) %} -->
         {% for book_info in books_info %}
         <!-- <h1>現在のcntは{{ns.cnt}}です</h1> -->
         <!-- {% set ns.cnt = ns.cnt + 1 %} -->
-        <div class="my-4 col-6 col-sm-4 ms-auto ">
+        <div class="my-4 col-6 col-sm-4 ms-auto position-relative">
           <a href={{ book_info["itemUrl"] }}> 
-            <img @mouseover="mouseOverAction({{loop.index}})" @mouseleave="mouseLeaveAction" class="books" src={{
+            <img  :class = "{fuwafuwa:hoverFlag && {{loop.index}} === hoverIndex}" @mouseover="mouseOverAction({{loop.index}})" @mouseleave="mouseLeaveAction" class="books " src={{
             book_info["mediumImageUrl"] }} alt={{ book_info["title"] }}>
           </a>
+          <div @mouseover="mouseOverAction({{loop.index}})" @mouseleave="mouseLeaveAction" class = "bg-light p-3 booksDetail" v-show="hoverFlag && {{loop.index}} === hoverIndex" >
+            <h3>{{ book_info["title"] }}</h3>
+            <ul class="list-inline"> 
+              <li>著者：{{ book_info["author"] }}</li>
+              <li>販売日：{{ book_info["salesDate"] }}</li>
+              <li>出版社：{{ book_info["publisherName"] }}</li>
+            </ul>
+            <p>{{ book_info["itemCaption"] }}</p>
+            <!-- <a href={{ book_info["itemUrl"] }}>楽天で購入</a> -->
+          </div>
         </div>
+      
         {% endfor %}
-        {% for book_info in books_info %}
-        <div @mouseover="mouseOverAction({{loop.index}})" @mouseleave="mouseLeaveAction" class = "bg-light p-3 booksDetail" v-show="hoverFlag && {{loop.index}} === hoverIndex">
-          <h3>{{ book_info["title"] }}</h3>
-          <ul class="list-inline"> 
-            <li>著者：{{ book_info["author"] }}</li>
-            <li>販売日：{{ book_info["salesDate"] }}</li>
-            <li>出版社：{{ book_info["publisherName"] }}</li>
-          </ul>
-          <p>{{ book_info["itemCaption"] }}</p>
-          <!-- <a href={{ book_info["itemUrl"] }}>楽天で購入</a> -->
-        </div>
-        {% endfor %}
+      
         
       </div>
     </div>
