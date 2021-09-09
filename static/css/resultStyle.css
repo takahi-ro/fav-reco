@@ -1,6 +1,73 @@
 /* Show it is fixed to the top */
 body {
-    min-height: 75rem;
-    padding-top: 4.5rem;
-    scroll-behavior: smooth;
-  }
+  background-color: #f2efe5;
+  /* font-family: "砧 丸明Yoshino StdN" ; */
+}
+
+html {
+  scroll-behavior: smooth;
+  user-select: none;
+}
+
+.navBar {
+  background-color: #150201;
+}
+
+.catchCopy {
+  background-color: rgba(0, 0, 0, 0.5);
+  position: absolute;
+  top: 55%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+}
+
+.backgroundImg3 {
+  height: 100vh;
+  background-image: url(../img/image_top3.jpg);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  /* opacity:0.5; */
+}
+
+.booksDetail{
+  position: relative;
+  top: 10%;
+  left: 50%;
+  width:70%;
+  transform: translate(-50%, -90%);
+}
+
+
+/***追従するトップへ戻るボタン***/
+#page-top {
+  position: fixed;
+  right: 5px;
+  bottom: 20px;
+  height: 50px;
+  text-decoration: none;
+  font-weight: bold;
+  transform: rotate(90deg);
+  font-size: 90%;
+  line-height: 1.5rem;
+  color: #737373;
+  padding: 0 0 0 35px;
+  border-top: solid 1px;
+}
+#page-top::before {
+  content: "";
+  display: block;
+  position: absolute;
+  top: -1px;
+  left: 0px;
+  width: 15px;
+  border-top: solid 1px;
+  transform: rotate(35deg);
+  transform-origin: left top;
+}
+/***トップへ戻るボタンここまで***/
+
+.footer {
+  background-color: #150201;
+}

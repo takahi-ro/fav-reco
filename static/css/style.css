@@ -12,10 +12,7 @@ body {
 
 html {
   scroll-behavior: smooth;
-}
-
-body {
-  background-color: #f2efe5;
+  user-select: none;
 }
 
 .navBar {
@@ -31,13 +28,16 @@ body {
 }
 
 /* レスポンシブデザイン */
-@media (max-width: 1199px) {
+
+
+@media (max-width: 2000px) {
   .catchCopy {
     background-color: rgba(0, 0, 0, 0.5);
     position: absolute;
     width: 60%;
     top: 35vh;
     left: 3vw;
+    font-size:2.5vw;
   }
 }
 
@@ -48,6 +48,7 @@ body {
     width: 60%;
     top: 35vh;
     left: 3vw;
+    font-size:2.5vw;
   }
 }
 
@@ -58,6 +59,7 @@ body {
     width: 60%;
     top: 35vh;
     left: 3vw;
+    font-size:2.5vw;
   }
 }
 
@@ -69,13 +71,25 @@ body {
     left: 50%;
     transform: translate(-50%, -50%);
     width: 100%;
-    
+    font-size:6vw;
+  }
+  .doggo{
+    margin-top:90px;
   }
 }
 
 .backgroundImg {
   height: 100vh;
   background-image: url(../img/image_top.jpg);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  /* opacity:0.5; */
+}
+
+.backgroundImg2 {
+  height: 100vh;
+  background-image: url(../img/image_top2.jpg);
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;

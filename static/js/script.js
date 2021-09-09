@@ -9,9 +9,11 @@ const login = {
   props: ['uasge','login']
 }
 
+
+
 const routes = [
   { path: '/usage', component: usage },
-  { path: '/login', component: login }
+  { path: '/test', component: login }
 ]
 
 
@@ -37,8 +39,12 @@ var app = new Vue({
       isActive4: false,
       topBody: true,
       HowtoUse: false,
-      // bLogin:false,
-      navFlag:false
+      bLogin:false,
+      navFlag:false,
+      topFlag: true,
+      topFlag2: false,
+      hoverFlag: false,
+      hoverIndex: null
     };
   },
   methods: {
@@ -49,8 +55,10 @@ var app = new Vue({
       this.isActive4 = false;
       this.topBody = true;
       this.HowtoUse = false;
-      // this.bLogin = false;
+      this.bLogin = false;
       this.navFlag = false;
+      this.topFlag = true;
+      this.topFlag2 = false
     },
     changeActive2: function () {
       this.isActive1 = false;
@@ -59,8 +67,10 @@ var app = new Vue({
       this.isActive4 = false;
       this.topBody = false;
       this.HowtoUse = true;
-      // this.bLogin = false;
+      this.bLogin = false;
       this.navFlag = false;
+      this.topFlag = false;
+      this.topFlag2 = true;
     },
     // changeActive3: function () {
     //   this.isActive1 = false;
@@ -84,6 +94,13 @@ var app = new Vue({
     },
     navButton: function(){
       this.navFlag = !this.navFlag;
+    },
+    mouseOverAction:function(index){
+      this.hoverFlag = true;
+      this.hoverIndex = index;
+    },
+    mouseLeaveAction: function(){
+      this.hoverFlag = false;
     }
 
   },

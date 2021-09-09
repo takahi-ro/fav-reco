@@ -43,13 +43,13 @@
           <div class="collapse navbar-collapse" :class="{show: navFlag}" id="navbarCollapse">
             <ul class="navbar-nav ms-auto mb-2 mb-md-0">
               <li class="nav-item " @click="changeActive1" :class="{active: isActive1}">
-                <router-link to="/" class="nav-link">TOP(つぶやき書店とは)</a>
+                <a href="/" class="nav-link">TOP(つぶやき書店とは)</a>
               </li>
               <li class="nav-item" @click="changeActive2" :class="{active: isActive2}">
                 <router-link to="/usage" class="nav-link">使い方</router-link>
               </li>
               <li class="nav-item"  :class="{active: isActive3}">
-                <a href="/login"  class="nav-link">書店を利用する</a>
+                <a href="/login" class="nav-link">書店を利用する</a>
               </li>
               <li class="nav-item" @click="changeActive4" :class="{active: isActive4}">
                 <a class="nav-link" href="#">Github</a>
@@ -62,13 +62,13 @@
           </div>
       </div>
     </nav>
-    <div class="backgroundImg w-100">
+    <div class=" w-100" :class = "{backgroundImg: topFlag,backgroundImg2: topFlag2}">
     </div>
-    <div class="catchCopy text-light p-4 h-50 ">
-      <p class='lh-lg fs-3 text-start ps-1'>まるで書店をあてもなくぶらつくような<br>
+    <div class="catchCopy text-light p-4 h-50">
+      <p class='lh-lg text-start ps-1'>まるで書店をあてもなくぶらつくような<br>
         そんな本との出会いを<br>
         あなたに。</p>
-      <p class="text-end mt-5 pt-2">Produced by Doggo Doggo Inc.</p>
+      <p class="text-end  pt-5 fs-6 doggo">Produced by Doggo Doggo Inc.</p>
     </div>
 
     <div v-if="topBody" class="topBody">
@@ -110,7 +110,9 @@
       </div>
     </div>
 
-    <router-view :usage="HowtoUse"></router-view>
+    <router-view :usage="HowtoUse">
+
+    </router-view>
 
 
 
@@ -128,7 +130,7 @@
           <li @click="changeActive2">- 使い方</li>
         </router-link>
         <a href="/login" class="text-decoration-none text-light">
-          <li >- 書店を利用する</li>
+          <li>- 書店を利用する</li>
         </a>
         <!-- <li>- プライバシーポリシー</li> -->
         <li>- リリースノート</li>
@@ -163,14 +165,14 @@
       <div class="pb-5 mb-5">
         <h2 class="pb-3">③運命の一冊に出会う</h2>
         <p>
-          おすすめページに並んだ本の表紙の中から、興味のある本を手に取ります（クリックします）。クリック後、本の詳細を確認することができます。また、「購入ページへ」のボタンから外部のECサイトに移り、本の購入を検討することもできます。<br><br>
+          おすすめページに並んだ本の表紙の中から、興味のある本を探します。表紙をホバーすると、本の詳細を確認することができます。また、ぜひ読みたいと思った本を手に取ると（クリックする）と外部のECサイトに移り、本の購入を検討することもできます。<br><br>
           使い方の説明はこのステップで終わりですが、ここからが、運命の一冊との出会いの始まりです。<br>
           以下のTwitterログインから、早速利用を開始しましょう！    
         </p>
         
-          <button class="d-block mt-5 btn btn-lg w-50   mx-auto mx-sm-0"
+          <button onclick="location.href=' http://127.0.0.1:8000/login'" class="d-block mt-5 btn btn-lg w-50   mx-auto mx-sm-0 text-light"
             style="background-color: #150210;">
-            <a href="/login" class="text-decoration-none text-light">Twitterログイン</a>
+           Twitterログイン
           
           </button>
         
@@ -178,6 +180,8 @@
 
     </div>
   </script>
+ 
+
   <!-- <script type='text/x-template' id='login'>
     <div class="bLogin container"  v-if="login">
 
