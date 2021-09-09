@@ -60,3 +60,22 @@ def getAozoraInfoFromTitleAndAuthor(title, author):
     results = requests.get(api_url, params).json()
     return results
 
+
+def getBookInfoFromBaseBookTitle(base_book_title):
+    rakuten_books_api_url = "https://app.rakuten.co.jp/services/api/BooksBook/Search/20170404"
+    params = {
+            "format": "json",
+            "applicationId": APPLICATION_ID,
+            "title": base_book_title,
+            "size": 0,
+            "hits": 1,
+            }
+    result = {}
+    try:
+        result_json = requests.get(rakuten_books_api_url, params).json()
+        book_info = result_json['Items'][0]['Item']
+        for key, value in book_info.items():
+            result[key] = value
+    except Exception as e:
+        print(e)
+    return result
