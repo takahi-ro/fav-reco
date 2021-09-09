@@ -8,8 +8,11 @@
   <title>fav-reco</title>
   <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14"></script>
   <!-- <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/blog/"> -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
   <link rel="stylesheet" href="../static/css/resultStyle.css">
+  <!-- Vue routerのCDN -->
+  <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
   <style>
     .bd-placeholder-img {
       font-size: 1.125rem;
@@ -29,62 +32,138 @@
 
 <body>
   <div id="appRoot">
-    <div class="container">
-      <div class="row w-75 mx-auto ">
-        <h1>recommended book</h1>
+    <nav class="navbar navbar-expand-md navbar-dark fixed-top navBar">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="/"><img style="width:200px; height:auto;" src="../static/img/logo_white-04.png"
+            alt="ロゴ"></a>
+        <button class="navbar-toggler" type="button" aria-controls="navbarCollapse" aria-label="Toggle navigation"
+          @click="navButton">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" :class="{show: navFlag}" id="navbarCollapse">
+          <ul class="navbar-nav ms-auto mb-2 mb-md-0">
+            <li class="nav-item " @click="changeActive1" :class="{active: isActive1}">
+              <a href="/" class="nav-link">TOP(つぶやき書店とは)</a>
+            </li>
+            <!-- <li class="nav-item" @click="changeActive2" :class="{active: isActive2}">
+                <router-link to="/usage" class="nav-link">使い方</router-link>
+              </li>
+              <li class="nav-item"  :class="{active: isActive3}">
+                <a href="/login"  class="nav-link">書店を利用する</a>
+              </li> -->
+            <li class="nav-item" @click="changeActive4" :class="{active: isActive4}">
+              <a class="nav-link" href="#">Github</a>
+            </li>
+          </ul>
+          <!-- <form class="d-flex">
+                  <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                  <button class="btn btn-outline-success" type="submit">Search</button>
+                </form> -->
+        </div>
+      </div>
+    </nav>
+    <div class=" w-100 backgroundImg3">
+    </div>
+    <div class="catchCopy text-light p-4 h-50 ">
+      <p class='lh-lg fs-1 text-center ps-1 py-5'>さあ、運命の本に出会おう。</p>
+      <p class="text-center mt-5 pt-2">Produced by Doggo Doggo Inc.</p>
+
+    </div>
+    <div class="container my-5 py-5">
+      <div class="row w-75 mx-auto text-center">
+        <h1 class = "d-block mb-4">あなたにおすすめの本はこちらです</h1>
+        <!-- {% set ns = namespace(cnt = 1) %} -->
         {% for book_info in books_info %}
-          <!-- <h3>{{ book_info["title"] }}</h3> -->
-          <img  class = "my-4 col-6 col-sm-4" src={{ book_info["mediumImageUrl"] }} alt={{ book_info["title"] }}>
-          <!-- <ul>
+        <!-- <h1>現在のcntは{{ns.cnt}}です</h1> -->
+        <!-- {% set ns.cnt = ns.cnt + 1 %} -->
+        <div class="my-4 col-6 col-sm-4 ms-auto ">
+          <a href={{ book_info["itemUrl"] }}> 
+            <img @mouseover="mouseOverAction({{loop.index}})" @mouseleave="mouseLeaveAction" class="books" src={{
+            book_info["mediumImageUrl"] }} alt={{ book_info["title"] }}>
+          </a>
+        </div>
+        {% endfor %}
+        {% for book_info in books_info %}
+        <div @mouseover="mouseOverAction({{loop.index}})" @mouseleave="mouseLeaveAction" class = "bg-light p-3 booksDetail" v-show="hoverFlag && {{loop.index}} === hoverIndex">
+          <h3>{{ book_info["title"] }}</h3>
+          <ul class="list-inline"> 
             <li>著者：{{ book_info["author"] }}</li>
             <li>販売日：{{ book_info["salesDate"] }}</li>
             <li>出版社：{{ book_info["publisherName"] }}</li>
           </ul>
           <p>{{ book_info["itemCaption"] }}</p>
-          <a href={{ book_info["itemUrl"] }}>楽天で購入</a> -->
+          <!-- <a href={{ book_info["itemUrl"] }}>楽天で購入</a> -->
+        </div>
         {% endfor %}
+        
       </div>
     </div>
+
+   
     <!-- <app-header  :link1 = "appLink1" :link2 = "appLink2" :logo = "appTitle"  :link3 = "appLink3" :link4 = "appLink4"></app-header> -->
-      
+
+    <div>
+      <a href="#" id="page-top">TOP</a>
+    </div>
+
+    <footer class="card-footer text-muted footer">
+      <img class="my-3 ms-2 h-auto" style="width:150px;" src="../static/img/logo_white-04.png" alt="ロゴ">
+      <ul style="list-style: none; " class="mb-5 text-light list-group-flush">
+        <a href="/" class="text-decoration-none text-light">
+          <li @click="changeActive1">- TOP(つぶやき書店とは） </li>
+        </a>
+        <router-link to="/usage" class="text-decoration-none text-light">
+          <li @click="changeActive2">- 使い方</li>
+        </router-link>
+        <a href="/login" class="text-decoration-none text-light">
+          <li>- 書店を利用する</li>
+        </a>
+        <!-- <li>- プライバシーポリシー</li> -->
+        <li>- リリースノート</li>
+      </ul>
+    </footer>
+
   </div>
 
 
-  
+
   <!-- 無駄にVue.jsの練習がてらVueで書く -->
   <script type='text/x-template' id='header'>
    <!-- <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark"> -->
-    <nav class="navbar navbar-dark fixed-top bg-dark">
-      <div class="container-fluid">
-        <a class="navbar-brand" href="/">[[logo]]</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarCollapse">
-          <ul class="navbar-nav me-auto mb-2 mb-md-0">
-            <li class="nav-item active">
-              <a class="nav-link" aria-current="page" href="/">[[link1]]</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" aria-current="page" href="/">[[link2]]</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/login">[[link3]]</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/">[[link4]]</a>
-            </li>
-          </ul>
-          <!-- <form class="d-flex">
+  <nav class="navbar navbar-dark fixed-top bg-dark">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="/">[[logo]]</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
+        aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarCollapse">
+        <ul class="navbar-nav me-auto mb-2 mb-md-0">
+          <li class="nav-item active">
+            <a class="nav-link" aria-current="page" href="/">[[link1]]</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" aria-current="page" href="/">[[link2]]</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/login">[[link3]]</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/">[[link4]]</a>
+          </li>
+        </ul>
+        <!-- <form class="d-flex">
             <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
             <button class="btn btn-outline-success" type="submit">Search</button>
           </form> -->
-        </div>
       </div>
-    </nav>
-</script>
-<script src="../static/js/script.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
+    </div>
+  </nav>
+  </script>
+  <script src="../static/js/script.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW"
+    crossorigin="anonymous"></script>
 </body>
 
 </html>
