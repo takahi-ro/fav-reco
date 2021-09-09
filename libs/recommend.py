@@ -56,12 +56,19 @@ def getMostSimilarBookTitlesFromTweet(twitter_id, path_to_dict, path_to_d2v_mode
         text_list = text.split(' ')
         sentences.append(text_list)
 
-    recommend = []
+    """
+    result = []
     for idx, s in enumerate(sentences):
         most_similar = m.dv.most_similar([m.infer_vector(s)], topn=1)
         target_tweet = tweets[idx]
         book_title = removeSymbol(titles[most_similar[0][0]])
         author = removeSymbol(authors[most_similar[0][0]])
-        recommend.append([target_tweet, book_title, author])
-
-    return recommend
+        recommend.append({book_title, author})
+    """
+    result = {}
+    for item in sentences:
+        most_similar = m.dv.most_similar([m.infer_vector(item)], topn=1)
+        book_title = removeSymbol(titles[most_similar[0][0]])
+        author = removeSymbol(authors[most_similar[0][0]])
+        result[book_title] = author
+    return result
