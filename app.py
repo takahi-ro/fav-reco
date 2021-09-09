@@ -1,7 +1,7 @@
 import os
 import time
 import tweepy as tp
-from libs import rakuten_api, recommend
+from libs import get_book_info, recommend
 from dotenv import load_dotenv
 from flask import Flask, render_template, request, session, redirect
 
@@ -15,8 +15,8 @@ CONSUMER_SECRET_API_KEY = os.environ.get("CONSUMER_SECRET_API_KEY")
 ACCESS_TOKEN = os.environ.get("ACCESS_TOKEN")
 ACCESS_TOKEN_SECRET = os.environ.get("ACCESS_TOKEN_SECRET")
 
-CALLBACK_URL = "http://127.0.0.1:8000/result"
-# CALLBACK_URL="https://tsubuyaki-syoten.herokuapp.com/favorites"
+# CALLBACK_URL = "http://127.0.0.1:8000/result"
+CALLBACK_URL="https://tsubuyaki-syoten.herokuapp.com/result"
 
 path_to_dict = "./libs/data/mecab/dic/ipadic"
 path_to_d2v_model = "./libs/data/Doc2Vec.model"
@@ -67,9 +67,12 @@ def result():
     for item in results:
         title = item[1]
         author = item[2]
-        book_info = rakuten_api.getBookInfoFromTitleAndAuthor(title, author)
-        if (book_info):
-            books_info.append(book_info)
+        print(title, author)
+        base_book = get_book_info.getAozoraBaseBookFromTitleAndAuthor(title, author)
+        if (base_book):
+            book_info = get_book_info.getBookInfoFromBaseBookTitle(base_book)
+            if (book_info):
+                books_info.append(book_info)
         time.sleep(0.2)
     return render_template('result.html', books_info=books_info)
 

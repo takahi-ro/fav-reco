@@ -19,7 +19,7 @@ def textsToWakatiList(texts, path_to_dict):
 
 def removeSymbol(soup):
     soup = unicodedata.normalize("NFKC", soup)
-    exclusion = "「」『』【】、。・" + "\n" + "\r" + "\u3000"
+    exclusion = "〔〕「」『』【】、。・" + "\n" + "\r" + "\u3000"
     soup = soup.translate(str.maketrans("", "", string.punctuation  + exclusion))
     return soup
 
@@ -59,15 +59,9 @@ def getMostSimilarBookTitlesFromTweet(twitter_id, path_to_dict, path_to_d2v_mode
     recommend = []
     for idx, s in enumerate(sentences):
         most_similar = m.dv.most_similar([m.infer_vector(s)], topn=1)
-        recommend.append([tweets[idx], titles[most_similar[0][0]], authors[most_similar[0][0]]])
+        target_tweet = tweets[idx]
+        book_title = removeSymbol(titles[most_similar[0][0]])
+        author = removeSymbol(authors[most_similar[0][0]])
+        recommend.append([target_tweet, book_title, author])
+
     return recommend
-
-
-"""
-path_to_d2v_model = "./data/Doc2Vec.model"
-path_to_aozora = "./data/aozora.csv"
-path_to_dict = "./data/mecab/dic/ipadic"
-results = getMostSimilarBookTitlesFromTweet("@unacceptablee2", path_to_dict, path_to_d2v_model, path_to_aozora)
-for item in results:
-    print(item[1], item[2])
-"""

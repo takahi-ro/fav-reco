@@ -51,13 +51,16 @@ def getBookInfoFromTitleAndAuthor(title, author):
     return result
 
 
-def getAozoraInfoFromTitleAndAuthor(title, author):
+def getAozoraBaseBookFromTitleAndAuthor(title, author):
     api_url = "http://pubserver2.herokuapp.com/api/v0.1/books"
     params = {
             "title": title,
-            "author": author,
             }
-    results = requests.get(api_url, params).json()
+    results = []
+    try:
+        results = requests.get(api_url, params).json()
+    except Exception as e:
+        print("error in getAozoraBaseBookFromTitleAndAuthor:", e)
     return results
 
 
