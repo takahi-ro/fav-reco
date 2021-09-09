@@ -15,8 +15,8 @@ CONSUMER_SECRET_API_KEY = os.environ.get("CONSUMER_SECRET_API_KEY")
 ACCESS_TOKEN = os.environ.get("ACCESS_TOKEN")
 ACCESS_TOKEN_SECRET = os.environ.get("ACCESS_TOKEN_SECRET")
 
-# CALLBACK_URL = "http://127.0.0.1:8000/result"
-CALLBACK_URL = "http://tsubuyaki-syoten.herokuapp.com/result"
+CALLBACK_URL = "http://127.0.0.1:8000/result"
+# CALLBACK_URL = "http://tsubuyaki-syoten.herokuapp.com/result"
 
 path_to_dict = "./libs/data/mecab/dic/ipadic"
 path_to_d2v_model = "./libs/data/Doc2Vec.model"
@@ -64,15 +64,18 @@ def result():
     user_id = api.me().screen_name
     results = recommend.getMostSimilarBookTitlesFromTweet(user_id, path_to_dict, path_to_d2v_model, path_to_aozora)
     books_info = []
-    for item in results:
-        title = item[1]
-        author = item[2]
+    for title, author in results.items():
         print(title, author)
+        book_info = get_book_info.getBookInfoFromTitle(title)
+        if (book_info):
+            books_info.append(book_info)
+        """
         base_book = get_book_info.getAozoraBaseBookFromTitleAndAuthor(title, author)
         if (base_book):
             book_info = get_book_info.getBookInfoFromBaseBookTitle(base_book)
             if (book_info):
                 books_info.append(book_info)
+        """
         time.sleep(0.2)
     return render_template('result.html', books_info=books_info)
 
