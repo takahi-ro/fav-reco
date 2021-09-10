@@ -8,12 +8,20 @@ import numpy as np
 import matplotlib.pyplot as plt
 import pandas as pd
 
+<<<<<<< Updated upstream
 df = pd.read_csv('/Users/jinya/Desktop/fav-reco/textdata.csv')
+=======
+df = pd.read_csv('C:/Users/S2/Documents/M2/つぶやき書店/fav-reco/textdata.csv')
+>>>>>>> Stashed changes
 titles = df["title"]
 
 # モデルを読み込む
 # モデルは絶対パスで指定してください
+<<<<<<< Updated upstream
 m = Doc2Vec.load('/Users/jinya/Desktop/fav-reco/new_doc2vec.model')
+=======
+m = Doc2Vec.load('C:/Users/S2/Documents/M2/つぶやき書店/fav-reco/model/new_doc2Vec.model')
+>>>>>>> Stashed changes
 
 # ベクトルをリストに格納
 vectors_list = [m.docvecs[n] for n in range(len(m.docvecs))]

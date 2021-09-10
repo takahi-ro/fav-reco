@@ -19,17 +19,17 @@ def textsToWakatiList(texts, path_to_dict):
 
 def removeSymbol(soup):
     soup = unicodedata.normalize("NFKC", soup)
-    exclusion = "〔〕「」『』【】、。・" + "\n" + "\r" + "\u3000"
+    exclusion = "「」『』【】、。・" + "\n" + "\r" + "\u3000"
     soup = soup.translate(str.maketrans("", "", string.punctuation  + exclusion))
     return soup
 
 
 def getFavs(user_id):
     load_dotenv()
-    CONSUMER_API_KEY = os.environ.get("CONSUMER_API_KEY")
-    CONSUMER_SECRET_API_KEY = os.environ.get("CONSUMER_SECRET_API_KEY")
-    ACCESS_TOKEN = os.environ.get("ACCESS_TOKEN")
-    ACCESS_TOKEN_SECRET = os.environ.get("ACCESS_TOKEN_SECRET")
+    CONSUMER_API_KEY = os.environ.get("qPMLPTw5wWFbMsOz0JdrPxqcS")
+    CONSUMER_SECRET_API_KEY = os.environ.get("1VlzfvR3AIyaXCe1IDPCr2lDYaufSehNH4PJ5EclgxEFZXc9T5")
+    ACCESS_TOKEN = os.environ.get("1361165452953620485-OgoQLVB3W15F1Bn3B130QCreJgbhXN")
+    ACCESS_TOKEN_SECRET = os.environ.get("lC99VaFgVsWyk9ZUEMZHiY6BimRsG4Y2MXFtsV0osvDoa")
     auth = tp.OAuthHandler(CONSUMER_API_KEY, CONSUMER_SECRET_API_KEY)
     auth.set_access_token(ACCESS_TOKEN, ACCESS_TOKEN_SECRET)
     api = tp.API(auth)
@@ -56,19 +56,18 @@ def getMostSimilarBookTitlesFromTweet(twitter_id, path_to_dict, path_to_d2v_mode
         text_list = text.split(' ')
         sentences.append(text_list)
 
-    """
-    result = []
+    recommend = []
     for idx, s in enumerate(sentences):
         most_similar = m.dv.most_similar([m.infer_vector(s)], topn=1)
-        target_tweet = tweets[idx]
-        book_title = removeSymbol(titles[most_similar[0][0]])
-        author = removeSymbol(authors[most_similar[0][0]])
-        recommend.append({book_title, author})
-    """
-    result = {}
-    for item in sentences:
-        most_similar = m.dv.most_similar([m.infer_vector(item)], topn=1)
-        book_title = removeSymbol(titles[most_similar[0][0]])
-        author = removeSymbol(authors[most_similar[0][0]])
-        result[book_title] = author
-    return result
+        recommend.append([tweets[idx], titles[most_similar[0][0]], authors[most_similar[0][0]]])
+    return recommend
+
+
+path_to_d2v_model = "C:/Users/S2/Documents/M2/つぶやき書店/fav-reco/libs/data/Doc2Vec.model"
+path_to_aozora = "C:/Users/S2/Documents/M2/つぶやき書店/fav-reco/libs/data/aozora.csv"
+path_to_dict = "C:/Users/S2/Documents/M2/つぶやき書店/fav-reco/libs/data/mecab/dic/ipadic"
+results = getMostSimilarBookTitlesFromTweet("@kai_washino", path_to_dict, path_to_d2v_model, path_to_aozora)
+for item in results:
+    print(item[1], item[2])
+
+

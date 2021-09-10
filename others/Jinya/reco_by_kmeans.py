@@ -14,12 +14,12 @@ import collections
 def cos_sim(v1, v2):
     return np.dot(v1, v2) / (np.linalg.norm(v1) * np.linalg.norm(v2))
 
-df = pd.read_csv('/Users/jinya/Desktop/fav-reco/textdata.csv')
+df = pd.read_csv('C:/Users/S2/Documents/M2/つぶやき書店/fav-reco/textdata_ver02.csv')
 titles = df["title"]
 
 # モデルを読み込む
 # モデルは絶対パスで指定してください
-m = Doc2Vec.load('/Users/jinya/Desktop/fav-reco/model/new_doc2vec.model')
+m = Doc2Vec.load('C:/Users/S2/Documents/M2/つぶやき書店/fav-reco/model/new_doc2vec_ver03.model')
 
 # ベクトルをリストに格納
 vectors_list = [m.docvecs[n] for n in range(len(m.docvecs))]
@@ -57,7 +57,7 @@ for c in cluster_to_docs:
     _cluster_vector /= len(cluster_to_docs[c])
     cluster_vector[c] = _cluster_vector
 
-tweets = get_favs("@odmishien")
+tweets = get_favs("@yuka__h__982")
 wakati_tweets = [MecabMorphologicalAnalysis(t, mecab=recc_from_one_tweet.wakati) for t in tweets]
 
 # リストに変換
@@ -80,11 +80,14 @@ for t_v in tweet_vector_list:
     cluster_tweet[sorted_sim].append(t_v)
 
 count_cluster = collections.Counter(sim_cluster)   #　クラスタの出現回数（辞書型）
+print(count_cluster)
 reccomend_cluster = max(count_cluster, key = count_cluster.get)
 
 print("あなたのクラスタは"+ str(reccomend_cluster) + "です")
-
-
+"""
+for doc_num in cluster_to_docs[reccomend_cluster]:
+    print(df["title"][doc_num])
+"""
 reccomend_doc = []
 for t_v in cluster_tweet[reccomend_cluster]:
     sim_docs = {}

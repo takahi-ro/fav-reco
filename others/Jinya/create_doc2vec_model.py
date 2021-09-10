@@ -1,46 +1,66 @@
-from gensim import corpora
-from gensim import models
 import pandas as pd
-import string
 import MeCab
-import unicodedata
 from gensim.models.doc2vec import Doc2Vec, TaggedDocument
-import os
 import re
+
+
+
 
 # MeCabの辞書にNEologdを指定。
 # mecabは携帯素解析用、wakatiは分かち書き用
-mecab = MeCab.Tagger('-d /usr/local/lib/mecab/dic/mecab-ipadic-neologd')
-wakati = MeCab.Tagger("-Owakati -d /usr/local/lib/mecab/dic/mecab-ipadic-neologd")
-
-def MecabMorphologicalAnalysis(path='./text.txt', output_file='wakati.txt', mecab=mecab, file=False):
-    mecab_text = ''
-    if file:
-        with open(path) as f:
-            for line in f:
-                mecab_text += mecab.parse(line)
-        with open(output_file, 'w') as f:
-            print(mecab_text, file=f)
-    else:
-        for path in path.split('\n'):
-            mecab_text += mecab.parse(path)
-        return mecab_text
+mecab = MeCab.Tagger("-d C:/neologd")
+wakati = MeCab.Tagger(r'-Owakati -d C:/neologd')
 
 
-# 記号文字は分析をするにあたって邪魔になるため、記号を取り除く関数を定義します。
-# 下に示すAozora_table関数の中で使います。
-def symbol_removal(soup):
-    soup = unicodedata.normalize("NFKC", soup)
-    exclusion = "「」『』【】、。・" + "\n" + "\r" + "\u3000"
-    soup = soup.translate(str.maketrans("", "", string.punctuation  + exclusion))
-    return soup
+df = pd.read_csv("C:/Users/S2/Documents/M2/つぶやき書店/washino/textdata_ver02.csv")
 
-df = pd.read_csv()
+
+"""
+texts = []
+text_remove_pp = mecab.parse(df['text'][0])
+words = []
+lines = text_remove_pp.split('\n')
+for line in lines:
+    items = re.split('[\t,]',line)
+    print(items)
+    if len(items) >= 2 and items[1] == '助詞':
+        continue
+    if len(items) >= 2 and items[1] == '連体詞':
+        continue
+    if len(items) >= 2 and items[2] == '代名詞':
+        continue
+    if len(items) >= 2 and items[0] == 'こと':
+        continue
+    words.append(items[0])
+text = (' '.join(words))
+
+texts.append(wakati.parse(text))
+print(texts)
+"""
 
 #わかち書き
+text_remove_pp = []
 texts = []
 for i in range(len(df)):
-    texts.append(MecabMorphologicalAnalysis(df['text'][i], mecab=wakati))
+    
+    text_remove_pp = mecab.parse(df['text'][i])
+    words = []
+    lines = text_remove_pp.split('\n')
+    for line in lines:
+        items = re.split('[\t,]',line)
+        if len(items) >= 2 and items[1] == '助詞':
+            continue
+        if len(items) >= 2 and items[1] == '連体詞':
+            continue
+        if len(items) >= 2 and items[2] == '代名詞':
+            continue
+        if len(items) >= 2 and items[0] == 'こと':
+            continue
+        words.append(items[0])
+    text = (' '.join(words))
+    
+    texts.append(wakati.parse(text))
+    print(i)
 
 # リストに変換
 sentences = []
@@ -50,5 +70,4 @@ for text in texts:
 
 documents = [TaggedDocument(doc, [i]) for i, doc in enumerate(sentences)]
 model = Doc2Vec(documents, vector_size=100, window=5, min_count=1)
-model.save("test/Jinya/models/Doc2Vec.model")
-
+model.save("C:/Users/S2/Documents/M2/つぶやき書店/fav-reco/model/new_doc2vec_ver03.model")
