@@ -13,7 +13,21 @@
   <link rel="stylesheet" href="../static/css/style.css">
   <!-- Vue routerのCDN -->
   <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
-  
+  <style>
+    .bd-placeholder-img {
+      font-size: 1.125rem;
+      text-anchor: middle;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      user-select: none;
+    }
+
+    @media (min-width: 768px) {
+      .bd-placeholder-img-lg {
+        font-size: 3.5rem;
+      }
+    }
+  </style>
 </head>
 
 <body>
@@ -28,8 +42,8 @@
         </button>
           <div class="collapse navbar-collapse" :class="{show: navFlag}" id="navbarCollapse">
             <ul class="navbar-nav ms-auto mb-2 mb-md-0">
-              <li class="nav-item" @click="changeActive1" :class="{active: isActive1}">
-                <a href="/" class="nav-link">TOP</a>
+              <li class="nav-item " @click="changeActive1" :class="{active: isActive1}">
+                <a href="/" class="nav-link">TOP(つぶやき書店とは)</a>
               </li>
               <li class="nav-item" @click="changeActive2" :class="{active: isActive2}">
                 <router-link to="/usage" class="nav-link">使い方</router-link>
@@ -50,15 +64,11 @@
     </nav>
     <div class=" w-100" :class = "{backgroundImg: topFlag,backgroundImg2: topFlag2}">
     </div>
-    <div class="catchCopy text-light p-4 h-50 d-flex align-items-center">
-      <div class="w-100">
-        <p class='lh-lg text-start ps-1'>
-          まるで書店をあてもなくぶらつくような<br>
-          そんな本との出会いを<br>
-          あなたに。
-        </p>
-        <p class="text-end pt-5 fs-6">Produced by Doggo Doggo Inc.</p>
-      </div>
+    <div class="catchCopy text-light p-4 h-50">
+      <p class='lh-lg text-start ps-1'>まるで書店をあてもなくぶらつくような<br>
+        そんな本との出会いを<br>
+        あなたに。</p>
+      <p class="text-end  pt-5 fs-6 doggo">Produced by Doggo Doggo Inc.</p>
     </div>
 
     <div v-if="topBody" class="topBody">
@@ -195,22 +205,5 @@
     integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW"
     crossorigin="anonymous"></script>
 </body>
-<style>
-  .bd-placeholder-img {
-    font-size: 1.125rem;
-    text-anchor: middle;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    user-select: none;
-  }
-  .nav-item{
-    margin-right: 1.5rem !important;
-  }
-  @media (min-width: 768px) {
-    .bd-placeholder-img-lg {
-      font-size: 3.5rem;
-    }
-  }
-</style>
 
 </html>
