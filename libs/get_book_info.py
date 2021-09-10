@@ -1,8 +1,4 @@
 import requests
-import os
-
-
-APPLICATION_ID = os.environ.get("APPLICATION_ID")
 
 
 # ISBNを引数に渡すと，その本に関する情報を辞書で返す
@@ -31,7 +27,7 @@ def getBookInfoFromISBN(isbn):
 
 # 文章タイトルと著者名から，本に関する情報を辞書で返す
 # 見つからなかった場合は空の辞書を返す
-def getBookInfoFromTitleAndAuthor(title, author):
+def getBookInfoFromTitleAndAuthor(title, author, APPLICATION_ID):
     rakuten_books_api_url = "https://app.rakuten.co.jp/services/api/BooksBook/Search/20170404"
     params = {
             "format": "json",
@@ -48,7 +44,7 @@ def getBookInfoFromTitleAndAuthor(title, author):
         for key, value in book_info.items():
             result[key] = value
     except Exception as e:
-        print(e)
+        print("error in getBookInfoFromTitleAndAuthor:", e)
     return result
 
 
