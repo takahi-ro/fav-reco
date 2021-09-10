@@ -24,7 +24,7 @@ def removeSymbol(soup):
     return soup
 
 
-def getFavs(user_id):
+def getFavs(user_id, count):
     load_dotenv()
     CONSUMER_API_KEY = os.environ.get("qPMLPTw5wWFbMsOz0JdrPxqcS")
     CONSUMER_SECRET_API_KEY = os.environ.get("1VlzfvR3AIyaXCe1IDPCr2lDYaufSehNH4PJ5EclgxEFZXc9T5")
@@ -34,7 +34,7 @@ def getFavs(user_id):
     auth.set_access_token(ACCESS_TOKEN, ACCESS_TOKEN_SECRET)
     api = tp.API(auth)
 
-    fav_tweets = api.favorites(user_id, count=10)
+    fav_tweets = api.favorites(user_id, count)
 
     url_pattern = re.compile("https://")
     fav_tweet_texts = [fav_tweet.text for fav_tweet in fav_tweets if not url_pattern.search(fav_tweet.text)]
@@ -48,7 +48,7 @@ def getMostSimilarBookTitlesFromTweet(twitter_id, path_to_dict, path_to_d2v_mode
     df = pd.read_csv(path_to_aozora)
     titles = df["title"]
     authors = df["author"]
-    tweets = getFavs(twitter_id)
+    tweets = getFavs(twitter_id, count=1)
     wakati_tweets = textsToWakatiList(tweets, path_to_dict)
 
     sentences = []

@@ -1,7 +1,7 @@
 import os
 import time
 import tweepy as tp
-from libs import get_book_info, recommend
+from libs import get_book_info, new_recommend
 from dotenv import load_dotenv
 from flask import Flask, render_template, request, session, redirect
 
@@ -22,9 +22,10 @@ CALLBACK_URL = "http://127.0.0.1:8000/result"
 path_to_dict = "./libs/data/mecab/dic/ipadic"
 path_to_d2v_model = "./libs/data/Doc2Vec.model"
 path_to_aozora = "./libs/data/aozora.csv"
+path_to_textdata = "./textdata.csv"
 path_to_dummy = "./static/img/dummy-book"
 path_to_book = "./static/img/book.png"
-
+path_to_model = "./model/new_doc2vec.model"
 dummy_img = os.listdir(path_to_dummy)
 
 
@@ -70,10 +71,11 @@ def result():
 
     api = tp.API(auth)
     user_id = api.me().screen_name
-    results = recommend.getMostSimilarBookTitlesFromTweet(user_id, path_to_dict, path_to_d2v_model, path_to_aozora)
+    # results = recommend.getMostSimilarBookTitlesFromTweet(user_id, path_to_dict, path_to_d2v_model, path_to_aozora)
+    results = new_recommend.getMostSimilerClusterOfFavs(user_id, path_to_textdata, path_to_dict, path_to_model)
     books_info = []
     for title, author in results.items():
-        book_info = get_book_info.getBookInfoFromTitle(title)
+        book_info = get_book_info.getBookInfoFromTitle(title, APPLICATION_ID)
         print(title, author, book_info)
         if (book_info):
             books_info.append(book_info)

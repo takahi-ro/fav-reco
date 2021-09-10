@@ -1,4 +1,3 @@
-
 from gensim.models.doc2vec import Doc2Vec
 from gensim.models.doc2vec import TaggedDocument
 from sklearn.cluster import KMeans
@@ -84,10 +83,14 @@ print(count_cluster)
 reccomend_cluster = max(count_cluster, key = count_cluster.get)
 
 print("あなたのクラスタは"+ str(reccomend_cluster) + "です")
+<<<<<<< HEAD
 """
 for doc_num in cluster_to_docs[reccomend_cluster]:
     print(df["title"][doc_num])
 """
+=======
+
+>>>>>>> 6a212e588de49fc94ebc7111e42f333454fccdf1
 reccomend_doc = []
 for t_v in cluster_tweet[reccomend_cluster]:
     sim_docs = {}

@@ -37,7 +37,7 @@ print(type(y_km))
 
 """
 
-X, y = make_blobs(n_samples=500,
+X, y = make_blobs(n_samples=8,
                   n_features=2,
                   centers=4,
                   cluster_std=1,
@@ -47,7 +47,7 @@ X, y = make_blobs(n_samples=500,
 
 print(X[0])
 
-km=KMeans(n_clusters=500,
+km=KMeans(n_clusters=8,
          init="k-means++",
          n_init=10,
          max_iter=300,
