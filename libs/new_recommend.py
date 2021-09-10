@@ -99,10 +99,10 @@ def getMostSimilerClusterOfFavs(twitter_id, path_to_textdata, path_to_dict, path
     count_cluster = collections.Counter(sim_cluster)
     reccomend_cluster = max(count_cluster, key=count_cluster.get)
 
-    print("Your cluster:", reccomend_cluster)
+    # print("Your cluster:", reccomend_cluster)
 
     result = {}
-    i=0
+    i = 0
     while len(result) < 12:
         for t_v in cluster_tweet[reccomend_cluster]:
             sim_docs = {}
@@ -111,8 +111,7 @@ def getMostSimilerClusterOfFavs(twitter_id, path_to_textdata, path_to_dict, path
             sim_docs_sorted = [s[0] for s in sorted(sim_docs.items(), key=lambda i: i[1], reverse=True)]
             title = df["title"][sim_docs_sorted[i]]
             author = df["author"][sim_docs_sorted[i]]
-            base_book = df["original"][sim_docs_sorted[i]]
-            result[title] = author
+            base_book = df["original"][sim_docs_sorted[i]].split("」")[0].split("「")[1]
+            result[base_book] = author
         i+=1
     return result
-

@@ -20,9 +20,8 @@ CALLBACK_URL = "http://127.0.0.1:8000/result"
 # CALLBACK_URL = "http://tsubuyaki-syoten.herokuapp.com/result"
 
 path_to_dict = "./libs/data/mecab/dic/ipadic"
-path_to_d2v_model = "./libs/data/Doc2Vec.model"
-path_to_aozora = "./libs/data/aozora.csv"
-path_to_textdata = "./textdata.csv"
+path_to_d2v_model = "./model/new_doc2vec_ver03.model"
+path_to_aozora = "./aozora_data.csv"
 path_to_dummy = "./static/img/dummy-book"
 path_to_book = "./static/img/book.png"
 path_to_model = "./model/new_doc2vec.model"
@@ -47,8 +46,10 @@ def test():
     books_info = []
     index = 0
     for book_title, author in sample_titles_and_authors.items():
-        book_info = get_book_info.getBookInfoFromTitleAndAuthor(book_title, author, APPLICATION_ID)
+        book_info = get_book_info.getBookInfoTest(book_title, author, APPLICATION_ID)
+        print(book_info)
         if (book_info):
+            print(path_to_dummy + "/" + dummy_img[index])
             book_info["mediumImageUrl"] = path_to_dummy + "/" + dummy_img[index]
             books_info.append(book_info)
             index += 1
@@ -71,21 +72,13 @@ def result():
 
     api = tp.API(auth)
     user_id = api.me().screen_name
-    # results = recommend.getMostSimilarBookTitlesFromTweet(user_id, path_to_dict, path_to_d2v_model, path_to_aozora)
-    results = new_recommend.getMostSimilerClusterOfFavs(user_id, path_to_textdata, path_to_dict, path_to_model)
+    results = new_recommend.getMostSimilerClusterOfFavs(user_id, path_to_aozora, path_to_dict, path_to_model)
     books_info = []
     for title, author in results.items():
+        print(title, author)
         book_info = get_book_info.getBookInfoFromTitle(title, APPLICATION_ID)
-        print(title, author, book_info)
         if (book_info):
             books_info.append(book_info)
-        """
-        base_book = get_book_info.getAozoraBaseBookFromTitleAndAuthor(title, author)
-        if (base_book):
-            book_info = get_book_info.getBookInfoFromBaseBookTitle(base_book)
-            if (book_info):
-                books_info.append(book_info)
-        """
         time.sleep(0.2)
     return render_template('result.html', books_info=books_info)
 
