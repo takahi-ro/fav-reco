@@ -7,7 +7,7 @@ from flask import Flask, render_template, request, session, redirect
 
 
 app = Flask(__name__)
-app.secret_key = "asPdljfaasdu3lv"
+app.secret_key = os.urandom(16)
 
 load_dotenv()
 CONSUMER_API_KEY = os.environ.get("CONSUMER_API_KEY")
@@ -65,8 +65,8 @@ def result():
     results = recommend.getMostSimilarBookTitlesFromTweet(user_id, path_to_dict, path_to_d2v_model, path_to_aozora)
     books_info = []
     for title, author in results.items():
-        print(title, author)
         book_info = get_book_info.getBookInfoFromTitle(title)
+        print(title, author, book_info)
         if (book_info):
             books_info.append(book_info)
         """
@@ -87,7 +87,7 @@ def login():
         redirect_url = auth.get_authorization_url()
         session['request_token'] = auth.request_token
     except tp.TweepError as e:
-        print(vars(e))
+        print("Tweepy Error:", vars(e))
     return redirect(redirect_url)
 
 
