@@ -3,8 +3,10 @@ import requests
 url = "https://api.bungomail.com/v0/books"
 params = {
         "作品名": "羅生門",
-        "limit": 3
+        "limit": 1
         }
 
 
-response = requests.
+result_json = requests.get(url, params).json()
+for k, v in result_json.items():
+    print(k)

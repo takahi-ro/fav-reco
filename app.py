@@ -24,7 +24,7 @@ path_to_d2v_model = "./model/new_doc2vec_ver03.model"
 path_to_aozora = "./aozora_data.csv"
 path_to_dummy = "./static/img/dummy-book"
 path_to_book = "./static/img/book.png"
-path_to_model = "./model/new_doc2vec.model"
+path_to_model = "./model/new_doc2vec_ver03.model"
 dummy_img = os.listdir(path_to_dummy)
 
 
