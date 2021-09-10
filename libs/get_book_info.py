@@ -1,6 +1,6 @@
 import requests
 
-
+APP_ID = "1095524729477042360"
 # ISBNを引数に渡すと，その本に関する情報を辞書で返す
 def getBookInfoFromISBN(isbn, APPLICATION_ID):
     rakuten_api_url = "https://app.rakuten.co.jp/services/api/BooksBook/Search/20170404"
@@ -34,15 +34,40 @@ def getBookInfoFromTitleAndAuthor(title, author, APPLICATION_ID):
             "applicationId": APPLICATION_ID,
             "title": title,
             "author": author,
-            "size": 2,
-            "hits": 1,
+            "size": 0,
+            "hits": 30,
+            "sort": "reviewCount"
             }
-    result = {}
+    result = []
     try:
         result_json = requests.get(rakuten_books_api_url, params).json()
-        book_info = result_json['Items'][0]['Item']
-        for key, value in book_info.items():
-            result[key] = value
+        for item in result_json['Items']:
+            if (item['Item']['author'] == author) and (item['Item']['title'] == title):
+                result.append(item['Item'])
+    except Exception as e:
+        print("error in getBookInfoFromTitleAndAuthor:", e)
+    return result
+
+
+def getBookInfoFromTitleAndAuthorAndPublisher(title, author, publisher, APPLICATION_ID):
+    rakuten_books_api_url = "https://app.rakuten.co.jp/services/api/BooksBook/Search/20170404"
+    params = {
+            "format": "json",
+            "applicationId": APPLICATION_ID,
+            "title": title,
+            "author": author,
+            "publisherName": publisher,
+            "size": 0,
+            "sort": "reviewCount",
+            "hits": 30,
+            }
+    result = []
+    try:
+        result_json = requests.get(rakuten_books_api_url, params).json()
+        print(len(result_json['Items']))
+        for item in result_json['Items']:
+            if (item['Item']['author'] == author) and (item['Item']['title'] == title) and(item['Item']['publisherName'] == publisher):
+                result.append(item['Item'])
     except Exception as e:
         print("error in getBookInfoFromTitleAndAuthor:", e)
     return result
@@ -81,21 +106,4 @@ def getBookInfoFromTitle(title, APPLICATION_ID):
     return result
 
 
-def getBookInfoFromBaseBookTitle(base_book_title, APPLICATION_ID):
-    rakuten_books_api_url = "https://app.rakuten.co.jp/services/api/BooksBook/Search/20170404"
-    params = {
-            "format": "json",
-            "applicationId": APPLICATION_ID,
-            "title": base_book_title,
-            "size": 0,
-            "hits": 1,
-            }
-    result = {}
-    try:
-        result_json = requests.get(rakuten_books_api_url, params).json()
-        book_info = result_json['Items'][0]['Item']
-        for key, value in book_info.items():
-            result[key] = value
-    except Exception as e:
-        print("error in getBookInfoFromBaseBookTitl:", e)
-    return result
+print(getBookInfoFromTitleAndAuthor("人間失格", "太宰治", APP_ID))
