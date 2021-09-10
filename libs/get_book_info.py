@@ -1,7 +1,8 @@
 import requests
+import os
 
 
-APPLICATION_ID = "1095524729477042360"
+APPLICATION_ID = os.environ.get("APPLICATION_ID")
 
 
 # ISBNを引数に渡すと，その本に関する情報を辞書で返す
@@ -80,7 +81,7 @@ def getBookInfoFromTitle(title):
         for key, value in book_info.items():
             result[key] = value
     except Exception as e:
-        print("error in getBookInfoFromTitl:", e)
+        print("error in getBookInfoFromTitle:", e)
     return result
 
 
@@ -100,5 +101,5 @@ def getBookInfoFromBaseBookTitle(base_book_title):
         for key, value in book_info.items():
             result[key] = value
     except Exception as e:
-        print(e)
+        print("error in getBookInfoFromBaseBookTitl:", e)
     return result
