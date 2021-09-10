@@ -43,6 +43,7 @@ var app = new Vue({
       navFlag:false,
       topFlag: true,
       topFlag2: false,
+      topFlag3:true,
       hoverFlag: false,
       hoverIndex: null
     };
@@ -71,6 +72,7 @@ var app = new Vue({
       this.navFlag = false;
       this.topFlag = false;
       this.topFlag2 = true;
+      this.topFlag3 = false;
     },
     // changeActive3: function () {
     //   this.isActive1 = false;
