@@ -45,12 +45,12 @@
             <li class="nav-item " @click="changeActive1" :class="{active: isActive1}">
               <a href="/" class="nav-link">TOP(つぶやき書店とは)</a>
             </li>
-            <!-- <li class="nav-item" @click="changeActive2" :class="{active: isActive2}">
-                <router-link to="/usage" class="nav-link">使い方</router-link>
-              </li>
-              <li class="nav-item"  :class="{active: isActive3}">
-                <a href="/login"  class="nav-link">書店を利用する</a>
-              </li> -->
+            <li class="nav-item" @click="changeActive2" :class="{active: isActive2}">
+              <router-link to="/usage" class="nav-link">使い方</router-link>
+            </li>
+            <li class="nav-item">
+              <a href="/login" class="nav-link">書店を利用する</a>
+            </li>
             <li class="nav-item">
               <a class="nav-link" href="https://github.com/HirokiOka/fav-reco">GitHub</a>
             </li>
@@ -62,28 +62,45 @@
         </div>
       </div>
     </nav>
-    <div class=" w-100 backgroundImg3">
+    <div class=" w-100 " :class = "{backgroundImg2: topFlag2,backgroundImg3: topFlag3}">
     </div>
-    <div class="catchCopy text-light p-4 h-50 ">
+    <div class="catchCopy2 text-light p-4 h-50 " v-if='topBody'>
       <p class='lh-lg fs-1 text-center ps-1 py-5'>さあ、運命の本に出会おう。</p>
       <p class="text-center mt-5 pt-2">Produced by Doggo Doggo Inc.</p>
-
     </div>
-    <div class="container mt-5 py-5 Contents">
+
+    <div class="catchCopy text-light p-4 h-50 d-flex align-items-center" v-if='HowtoUse'>
+      <div class="w-100">
+        <p class='lh-lg text-start ps-1'>
+          まるで書店をあてもなくぶらつくような<br>
+          そんな本との出会いを<br>
+          あなたに。
+        </p>
+        <p class="text-end pt-5 fs-6">Produced by Doggo Doggo Inc.</p>
+      </div>
+    </div>
+
+    <div class="container mt-5  Contents" v-if="topBody">
+      <div class="mt-5 w-75 text-center  mx-auto headTitle" style="background-color: #150210BF;">
+        <p class="p-3 fs-1 text-light align-middle mb-5">いいね解析の結果</p>
+      </div>
       <div class="row w-75 mx-auto text-center">
-        <h1 class = "d-block mb-4">あなたにおすすめの本はこちらです</h1>
+        <h2 class="d-block mb-4 pt-3">あなたにおすすめの本はこちらです</h2>
         <!-- {% set ns = namespace(cnt = 1) %} -->
         {% for book_info in books_info %}
         <!-- <h1>現在のcntは{{ns.cnt}}です</h1> -->
         <!-- {% set ns.cnt = ns.cnt + 1 %} -->
         <div class="my-4 col-6 col-sm-4 ms-auto position-relative">
-          <a href={{ book_info["itemUrl"] }}> 
-            <img  :class = "{fuwafuwa:hoverFlag && {{loop.index}} === hoverIndex}" @mouseover="mouseOverAction({{loop.index}})" @mouseleave="mouseLeaveAction" class="books " src={{
-            book_info["mediumImageUrl"] }} alt={{ book_info["title"] }}>
+          <a href={{ book_info["itemUrl"] }}>
+            <img :class="{fuwafuwa:hoverFlag && {{loop.index}} === hoverIndex}"
+              @mouseover="mouseOverAction({{loop.index}})" @mouseleave="mouseLeaveAction" class="books " src={{
+              book_info["mediumImageUrl"] }} alt={{ book_info["title"] }}>
           </a>
-          <div @mouseover="mouseOverAction({{loop.index}})" @mouseleave="mouseLeaveAction" class = "bg-light p-3 booksDetail rounded border border-2 border-dark" v-show="hoverFlag && {{loop.index}} === hoverIndex" >
+          <div @mouseover="mouseOverAction({{loop.index}})" @mouseleave="mouseLeaveAction"
+            class="bg-light p-3 booksDetail rounded border border-2 border-dark"
+            v-show="hoverFlag && {{loop.index}} === hoverIndex">
             <h3>{{ book_info["title"] }}</h3>
-            <ul class="list-inline"> 
+            <ul class="list-inline">
               <li>著者：{{ book_info["author"] }}</li>
               <li>販売日：{{ book_info["salesDate"] }}</li>
               <li>出版社：{{ book_info["publisherName"] }}</li>
@@ -92,14 +109,35 @@
             <!-- <a href={{ book_info["itemUrl"] }}>楽天で購入</a> -->
           </div>
         </div>
-      
+
         {% endfor %}
-      
-        
+
+        <!-- 解析結果を表示するためのとりあえずの型 -->
+        <div class="text-center mt-5 ">
+          <h2 class="mt-3">あなたが所属するクラス</h2>
+          <a href="#" class="fs-2 text-dark text-decoration-none">Aクラス</a>
+
+          <h2 class="mt-5">クラスの種類</h2>
+          <div class="row mt-3 ">
+            <a class="col-sm-3 col-6 fs-2 text-dark text-decoration-none">Aクラス</a>
+            <a class="col-sm-3 col-6 fs-2 text-dark text-decoration-none">Bクラス</a>
+            <a class="col-sm-3 col-6 fs-2 text-dark text-decoration-none">Cクラス</a>
+            <a class="col-sm-3 col-6 fs-2 text-dark text-decoration-none">Dクラス</a>
+            <a class="col-sm-3 col-6 fs-2 text-dark text-decoration-none">Eクラス</a>
+            <a class="col-sm-3 col-6 fs-2 text-dark text-decoration-none">Fクラス</a>
+            <a class="col-sm-3 col-6 fs-2 text-dark text-decoration-none">Gクラス</a>
+            <a class="col-sm-3 col-6 fs-2 text-dark text-decoration-none">Hクラス</a>
+          </div>
+        </div>
+
       </div>
+
+
     </div>
 
-   
+    <router-view :usage="HowtoUse">
+
+    </router-view>
     <!-- <app-header  :link1 = "appLink1" :link2 = "appLink2" :logo = "appTitle"  :link3 = "appLink3" :link4 = "appLink4"></app-header> -->
 
     <div>
@@ -125,6 +163,49 @@
 
   </div>
 
+
+  <script type='text/x-template' id='usage'>
+    <div class="HowtoUse container"  v-if="usage">
+       <div class="mt-5 w-75 text-center headTitle mx-auto" style="background-color: #150210BF;">
+         <p class="p-3 fs-1 text-light align-middle">ご利用方法</p>
+       </div>
+ 
+       <div class="mt-4  pt-5">
+         <h2 class="pb-3">①普段使っているTwitterアカウントを用意
+         </h2>
+         <p>つぶやき書店は、個人のTwitterアカウントでいいねしたツイートを解析し、あなたにあった本をおすすめします。
+           <br>ですので、あなたが普段使用しているTwitterアカウントでのご利用を推奨します。
+         </p>
+       </div>
+ 
+       <div class="py-5 my-2">
+         <h2 class="pb-3">②実際に書店を利用する</h2>
+         <p>
+           ヘッダーのメニューにある「書店を利用する」からTwitterログイン認証を行うと、あんたが過去にいいねしたツイートを分析し、潜在的な興味関心にあった本のおすすめ一覧ページを表示します。下にあるTwitterログインボタンからも利用可能です。<br>
+           あなたのいいねの解析結果についての情報を見ることもできます。
+ 
+ 
+         </p>
+       </div>
+ 
+       <div class="pb-5 mb-5">
+         <h2 class="pb-3">③運命の一冊に出会う</h2>
+         <p>
+           おすすめページに並んだ本の表紙の中から、興味のある本を探します。表紙をホバーすると、本の詳細を確認することができます。また、ぜひ読みたいと思った本を手に取ると（クリックする）と外部のECサイトに移り、本の購入を検討することもできます。<br><br>
+           使い方の説明はこのステップで終わりですが、ここからが、運命の一冊との出会いの始まりです。<br>
+           以下のTwitterログインから、早速利用を開始しましょう！    
+         </p>
+         
+           <button onclick="location.href='/login'" class="d-block mt-5 btn btn-lg w-50   mx-auto mx-sm-0 text-light"
+             style="background-color: #150210;">
+            Twitterログイン
+           
+           </button>
+         
+       </div>
+ 
+     </div>
+   </script>
 
 
   <!-- 無駄にVue.jsの練習がてらVueで書く -->
