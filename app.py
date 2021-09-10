@@ -1,7 +1,8 @@
 import os
 import time
+import random
 import tweepy as tp
-from libs import get_book_info, new_recommend
+from libs import get_book_info, aozora_api, new_recommend
 from dotenv import load_dotenv
 from flask import Flask, render_template, request, session, redirect
 
@@ -16,8 +17,8 @@ ACCESS_TOKEN = os.environ.get("ACCESS_TOKEN")
 ACCESS_TOKEN_SECRET = os.environ.get("ACCESS_TOKEN_SECRET")
 APPLICATION_ID = os.environ.get("APPLICATION_ID")
 
-# CALLBACK_URL = "http://127.0.0.1:8000/result"
-CALLBACK_URL = "http://tsubuyaki-syoten.herokuapp.com/result"
+CALLBACK_URL = "http://127.0.0.1:8000/result"
+# CALLBACK_URL = "http://tsubuyaki-syoten.herokuapp.com/result"
 
 path_to_dict = "./libs/data/mecab/dic/ipadic"
 path_to_d2v_model = "./model/new_doc2vec_ver03.model"
@@ -80,6 +81,15 @@ def result():
         book_info = get_book_info.getBookInfoFromTitle(title, APPLICATION_ID)
         if (book_info):
             books_info.append(book_info)
+        else:
+            book_info = aozora_api.getAozoraInfo(title)
+            if (book_info):
+                book_info["mediumImageUrl"] = path_to_dummy + "/" + dummy_img[random.randint(1, 5)]
+                books_info.append(book_info)
+            else:
+                continue
+        if (len(books_info) > 5):
+            break
         time.sleep(0.2)
     return render_template('result.html', books_info=books_info)
 
