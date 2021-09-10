@@ -14,13 +14,18 @@ CONSUMER_API_KEY = os.environ.get("CONSUMER_API_KEY")
 CONSUMER_SECRET_API_KEY = os.environ.get("CONSUMER_SECRET_API_KEY")
 ACCESS_TOKEN = os.environ.get("ACCESS_TOKEN")
 ACCESS_TOKEN_SECRET = os.environ.get("ACCESS_TOKEN_SECRET")
+APPLICATION_ID = os.environ.get("APPLICATION_ID")
 
-# CALLBACK_URL = "http://127.0.0.1:8000/result"
-CALLBACK_URL = "http://tsubuyaki-syoten.herokuapp.com/result"
+CALLBACK_URL = "http://127.0.0.1:8000/result"
+# CALLBACK_URL = "http://tsubuyaki-syoten.herokuapp.com/result"
 
 path_to_dict = "./libs/data/mecab/dic/ipadic"
 path_to_d2v_model = "./libs/data/Doc2Vec.model"
 path_to_aozora = "./libs/data/aozora.csv"
+path_to_dummy = "./static/img/dummy-book"
+path_to_book = "./static/img/book.png"
+
+dummy_img = os.listdir(path_to_dummy)
 
 
 @app.route("/")
@@ -39,10 +44,13 @@ def test():
             "パプリカ": "筒井康隆"
             }
     books_info = []
+    index = 0
     for book_title, author in sample_titles_and_authors.items():
-        book_info = get_book_info.getBookInfoFromTitleAndAuthor(book_title, author)
+        book_info = get_book_info.getBookInfoFromTitleAndAuthor(book_title, author, APPLICATION_ID)
         if (book_info):
+            book_info["mediumImageUrl"] = path_to_dummy + "/" + dummy_img[index]
             books_info.append(book_info)
+            index += 1
         time.sleep(0.2)
     return render_template('result.html', books_info=books_info)
 
