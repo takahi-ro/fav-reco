@@ -7,7 +7,7 @@ from flask import Flask, render_template, request, session, redirect
 
 
 app = Flask(__name__)
-app.secret_key = "asPdljfaasdu3lv"
+app.secret_key = os.urandom(16)
 
 load_dotenv()
 CONSUMER_API_KEY = os.environ.get("CONSUMER_API_KEY")
@@ -15,8 +15,8 @@ CONSUMER_SECRET_API_KEY = os.environ.get("CONSUMER_SECRET_API_KEY")
 ACCESS_TOKEN = os.environ.get("ACCESS_TOKEN")
 ACCESS_TOKEN_SECRET = os.environ.get("ACCESS_TOKEN_SECRET")
 
-# CALLBACK_URL = "http://127.0.0.1:8000/result"
-CALLBACK_URL = "http://tsubuyaki-syoten.herokuapp.com/result"
+CALLBACK_URL = "http://127.0.0.1:8000/result"
+# CALLBACK_URL = "http://tsubuyaki-syoten.herokuapp.com/result"
 
 path_to_dict = "./libs/data/mecab/dic/ipadic"
 path_to_d2v_model = "./libs/data/Doc2Vec.model"
@@ -65,8 +65,8 @@ def result():
     results = recommend.getMostSimilarBookTitlesFromTweet(user_id, path_to_dict, path_to_d2v_model, path_to_aozora)
     books_info = []
     for title, author in results.items():
-        print(title, author)
         book_info = get_book_info.getBookInfoFromTitle(title)
+        print(title, author, book_info)
         if (book_info):
             books_info.append(book_info)
         """
@@ -87,7 +87,7 @@ def login():
         redirect_url = auth.get_authorization_url()
         session['request_token'] = auth.request_token
     except tp.TweepError as e:
-        print(vars(e))
+        print("Tweepy Error:", vars(e))
     return redirect(redirect_url)
 
 
