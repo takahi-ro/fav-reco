@@ -35,8 +35,8 @@ var app = new Vue({
       //  appLink4: 'Github',
       isActive1: true,
       isActive2: false,
-      isActive3: false,
-      isActive4: false,
+      // isActive3: false,
+      // isActive4: false,
       topBody: true,
       HowtoUse: false,
       bLogin:false,
@@ -51,11 +51,11 @@ var app = new Vue({
     changeActive1: function () {
       this.isActive1 = true;
       this.isActive2 = false;
-      this.isActive3 = false;
-      this.isActive4 = false;
+      // this.isActive3 = false;
+      // this.isActive4 = false;
       this.topBody = true;
       this.HowtoUse = false;
-      this.bLogin = false;
+      // this.bLogin = false;
       this.navFlag = false;
       this.topFlag = true;
       this.topFlag2 = false
@@ -63,11 +63,11 @@ var app = new Vue({
     changeActive2: function () {
       this.isActive1 = false;
       this.isActive2 = true;
-      this.isActive3 = false;
-      this.isActive4 = false;
+      // this.isActive3 = false;
+      // this.isActive4 = false;
       this.topBody = false;
       this.HowtoUse = true;
-      this.bLogin = false;
+      // this.bLogin = false;
       this.navFlag = false;
       this.topFlag = false;
       this.topFlag2 = true;
@@ -82,16 +82,16 @@ var app = new Vue({
     //   this.bLogin = true;
     //   this.navFlag = false;
     // },
-    changeActive4: function () {
-      this.isActive1 = false;
-      this.isActive2 = false;
-      this.isActive3 = false;
-      this.isActive4 = true;
-      this.topBody = false;
-      this.HowtoUse = false;
-      // this.bLogin = false;
-      this.navFlag = false;
-    },
+    // changeActive4: function () {
+    //   this.isActive1 = false;
+    //   this.isActive2 = false;
+    //   this.isActive3 = false;
+    //   this.isActive4 = true;
+    //   this.topBody = false;
+    //   this.HowtoUse = false;
+    //   // this.bLogin = false;
+    //   this.navFlag = false;
+    // },
     navButton: function(){
       this.navFlag = !this.navFlag;
     },

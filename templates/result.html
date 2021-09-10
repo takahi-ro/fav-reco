@@ -51,7 +51,7 @@
               <li class="nav-item"  :class="{active: isActive3}">
                 <a href="/login"  class="nav-link">書店を利用する</a>
               </li> -->
-            <li class="nav-item" @click="changeActive4" :class="{active: isActive4}">
+            <li class="nav-item">
               <a class="nav-link" href="https://github.com/HirokiOka/fav-reco">GitHub</a>
             </li>
           </ul>
@@ -81,7 +81,7 @@
             <img  :class = "{fuwafuwa:hoverFlag && {{loop.index}} === hoverIndex}" @mouseover="mouseOverAction({{loop.index}})" @mouseleave="mouseLeaveAction" class="books " src={{
             book_info["mediumImageUrl"] }} alt={{ book_info["title"] }}>
           </a>
-          <div @mouseover="mouseOverAction({{loop.index}})" @mouseleave="mouseLeaveAction" class = "bg-light p-3 booksDetail" v-show="hoverFlag && {{loop.index}} === hoverIndex" >
+          <div @mouseover="mouseOverAction({{loop.index}})" @mouseleave="mouseLeaveAction" class = "bg-light p-3 booksDetail rounded border border-2 border-dark" v-show="hoverFlag && {{loop.index}} === hoverIndex" >
             <h3>{{ book_info["title"] }}</h3>
             <ul class="list-inline"> 
               <li>著者：{{ book_info["author"] }}</li>
