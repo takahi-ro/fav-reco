@@ -23,6 +23,7 @@ path_to_dict = "./libs/data/mecab/dic/ipadic"
 path_to_d2v_model = "./libs/data/Doc2Vec.model"
 path_to_aozora = "./libs/data/aozora.csv"
 path_to_dummy = "./static/img/dummy-book"
+path_to_book = "./static/img/book.png"
 
 dummy_img = os.listdir(path_to_dummy)
 
