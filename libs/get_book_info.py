@@ -2,7 +2,7 @@ import requests
 
 
 # ISBNを引数に渡すと，その本に関する情報を辞書で返す
-def getBookInfoFromISBN(isbn):
+def getBookInfoFromISBN(isbn, APPLICATION_ID):
     rakuten_api_url = "https://app.rakuten.co.jp/services/api/BooksBook/Search/20170404"
     params = {
             "format": "json",
@@ -61,7 +61,7 @@ def getAozoraBaseBookFromTitleAndAuthor(title, author):
     return results
 
 
-def getBookInfoFromTitle(title):
+def getBookInfoFromTitle(title, APPLICATION_ID):
     rakuten_books_api_url = "https://app.rakuten.co.jp/services/api/BooksBook/Search/20170404"
     params = {
             "format": "json",
@@ -81,7 +81,7 @@ def getBookInfoFromTitle(title):
     return result
 
 
-def getBookInfoFromBaseBookTitle(base_book_title):
+def getBookInfoFromBaseBookTitle(base_book_title, APPLICATION_ID):
     rakuten_books_api_url = "https://app.rakuten.co.jp/services/api/BooksBook/Search/20170404"
     params = {
             "format": "json",

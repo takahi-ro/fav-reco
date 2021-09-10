@@ -1,4 +1,3 @@
-
 from gensim.models.doc2vec import Doc2Vec
 from gensim.models.doc2vec import TaggedDocument
 from sklearn.cluster import KMeans
@@ -83,7 +82,6 @@ count_cluster = collections.Counter(sim_cluster)   #　クラスタの出現回�
 reccomend_cluster = max(count_cluster, key = count_cluster.get)
 
 print("あなたのクラスタは"+ str(reccomend_cluster) + "です")
-
 
 reccomend_doc = []
 for t_v in cluster_tweet[reccomend_cluster]:
