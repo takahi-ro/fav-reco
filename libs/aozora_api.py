@@ -8,5 +8,11 @@ params = {
 
 
 result_json = requests.get(url, params).json()
-for k, v in result_json.items():
+# for k, v in result_json.items():
     # "XHTML/HTMLファイルUR"
+
+
+print(result_json['books'][0])
+print(result_json['books'][0]['公開日'])
+print(result_json['books'][0]['XHTML/HTMLファイルURL'])
+
