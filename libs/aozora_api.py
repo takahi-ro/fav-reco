@@ -9,4 +9,4 @@ params = {
 
 result_json = requests.get(url, params).json()
 for k, v in result_json.items():
-    print(k)
+    # "XHTML/HTMLファイルUR"

@@ -30,6 +30,7 @@ dummy_img = os.listdir(path_to_dummy)
 
 @app.route("/")
 def index():
+    print(APPLICATION_ID)
     return render_template('index.html')
 
 

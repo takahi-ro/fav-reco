@@ -36,7 +36,7 @@ def getBookInfoTest(title, author, APPLICATION_ID):
     result = {}
     try:
         result_json = requests.get(rakuten_books_api_url, params).json()
-        result  = result_json["Items"][0]["Item"]
+        result = result_json['Items'][0]['Item']
     except Exception as e:
         print("error in getBookInfoTest:", e)
     return result
@@ -122,9 +122,3 @@ def getBookInfoFromTitle(title, APPLICATION_ID):
     except Exception as e:
         print("error in getBookInfoFromTitle:", e)
     return result
-
-
-"""
-APP_ID = "1095524729477042360"
-print(getBookInfoFromTitle("修羅場", APP_ID))
-"""
