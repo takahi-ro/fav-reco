@@ -22,6 +22,34 @@ html {
   width: 100%;
 }
 
+/* レスポンシブデザイン */
+@media (max-width: 1199px) {
+  .books {
+    width:50%;
+  }
+
+}
+
+@media (max-width: 991px) {
+  .books {
+    width:58%;
+  }
+
+}
+
+@media (max-width: 767px) {
+  .books {
+    width:66%;
+  }
+   
+}
+
+@media (max-width: 575px) {
+  .books {
+    width:70%;
+  }
+}
+
 .backgroundImg3 {
   height: 100vh;
   background-image: url(../img/image_top3.jpg);
@@ -32,11 +60,12 @@ html {
 }
 
 .booksDetail{
-  position: relative;
-  top: 10%;
+  position: absolute;
+  top: 140px;
   left: 50%;
-  width:70%;
-  transform: translate(-50%, -90%);
+  width:200%;
+  transform: translateX(-50%);
+  z-index:2;
 }
 
 
@@ -70,4 +99,14 @@ html {
 
 .footer {
   background-color: #150201;
+}
+
+.fuwafuwa{
+  box-shadow: 10px 10px 10px rgba(0,0,0,0.5);
+  transform: translateY(-10px);
+  transition-duration: 0.5s;
+}
+
+.Contents{
+  margin-bottom:150px;
 }
