@@ -58,11 +58,28 @@ def test():
     return render_template('result.html', books_info=books_info)
 
 
+@app.route('/login', methods=['GET'])
+def login():
+    auth = tp.OAuthHandler(CONSUMER_API_KEY, CONSUMER_SECRET_API_KEY, CALLBACK_URL)
+    auth.set_access_token(ACCESS_TOKEN, ACCESS_TOKEN_SECRET)
+    try:
+        redirect_url = auth.get_authorization_url()
+        redirect_http = redirect_url.replace("s", "", 1)
+        session['request_token'] = auth.request_token
+    except tp.TweepError as e:
+        print("Tweepy Error:", vars(e))
+    return redirect(redirect_http)
+
+
 @app.route("/result")
 def result():
     verifier = request.args.get('oauth_verifier')
     auth = tp.OAuthHandler(CONSUMER_API_KEY, CONSUMER_SECRET_API_KEY, CALLBACK_URL)
-    token = session['request_token']
+    try:
+        token = session['request_token']
+    except Exception as e:
+        print(e)
+        return 
     session.pop('request_token', None)
     auth.request_token = token
 
@@ -70,6 +87,7 @@ def result():
         auth.get_access_token(verifier)
     except tp.TweepError as e:
         print(vars(e))
+        return render_template('index.html')
 
     api = tp.API(auth)
     user_id = api.me().screen_name
@@ -92,18 +110,6 @@ def result():
         time.sleep(0.2)
     return render_template('result.html', books_info=books_info)
 
-
-@app.route('/login', methods=['GET'])
-def login():
-    auth = tp.OAuthHandler(CONSUMER_API_KEY, CONSUMER_SECRET_API_KEY, CALLBACK_URL)
-    auth.set_access_token(ACCESS_TOKEN, ACCESS_TOKEN_SECRET)
-    try:
-        redirect_url = auth.get_authorization_url()
-        redirect_http = redirect_url.replace("s", "", 1)
-        session['request_token'] = auth.request_token
-    except tp.TweepError as e:
-        print("Tweepy Error:", vars(e))
-    return redirect(redirect_http)
 
 
 if __name__ == "__main__":
