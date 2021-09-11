@@ -96,6 +96,7 @@ def result():
 @app.route('/login', methods=['GET'])
 def login():
     auth = tp.OAuthHandler(CONSUMER_API_KEY, CONSUMER_SECRET_API_KEY, CALLBACK_URL)
+    auth.set_access_token(ACCESS_TOKEN, ACCESS_TOKEN_SECRET)
     try:
         redirect_url = auth.get_authorization_url()
         session['request_token'] = auth.request_token
