@@ -111,7 +111,7 @@ def getMostSimilerClusterOfFavs(twitter_id, path_to_textdata, path_to_dict, path
             sim_docs_sorted = [s[0] for s in sorted(sim_docs.items(), key=lambda i: i[1], reverse=True)]
             title = df["title"][sim_docs_sorted[i]]
             author = df["author"][sim_docs_sorted[i]]
-            base_book = df["original"][sim_docs_sorted[i]].split("」")[0].split("「")[1]
+            # base_book = df["original"][sim_docs_sorted[i]].split("」")[0].split("「")[1]
             result[title] = author
         i+=1
     return result
