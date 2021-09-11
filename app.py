@@ -62,7 +62,7 @@ def test():
 @app.route("/result")
 def result():
     verifier = request.args.get('oauth_verifier')
-    auth = tp.OAuthHandler(CONSUMER_API_KEY, CONSUMER_SECRET_API_KEY)
+    auth = tp.OAuthHandler(CONSUMER_API_KEY, CONSUMER_SECRET_API_KEY, CALLBACK_URL)
     token = session['request_token']
     session.pop('request_token', None)
     auth.request_token = token

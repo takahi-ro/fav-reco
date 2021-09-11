@@ -104,7 +104,6 @@ def getBookInfoFromTitle(title, APPLICATION_ID):
     try:
         response = requests.get(rakuten_books_api_url, params)
         result_json = response.json()
-        print(result_json)
         book_info = result_json['Items'][0]['Item']
         for key, value in book_info.items():
             result[key] = value
