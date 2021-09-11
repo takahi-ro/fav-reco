@@ -17,8 +17,8 @@ ACCESS_TOKEN = os.environ.get("ACCESS_TOKEN")
 ACCESS_TOKEN_SECRET = os.environ.get("ACCESS_TOKEN_SECRET")
 APPLICATION_ID = os.environ.get("APPLICATION_ID")
 
-# CALLBACK_URL = "http://127.0.0.1:8000/result"
-CALLBACK_URL = "http://tsubuyaki-syoten.herokuapp.com/result"
+CALLBACK_URL = "http://127.0.0.1:8000/result"
+# CALLBACK_URL = "http://tsubuyaki-syoten.herokuapp.com/result"
 
 path_to_dict = "./libs/data/mecab/dic/ipadic"
 path_to_d2v_model = "./model/new_doc2vec_ver03.model"
@@ -99,10 +99,11 @@ def login():
     auth.set_access_token(ACCESS_TOKEN, ACCESS_TOKEN_SECRET)
     try:
         redirect_url = auth.get_authorization_url()
+        redirect_http = redirect_url.replace("s", "", 1)
         session['request_token'] = auth.request_token
     except tp.TweepError as e:
         print("Tweepy Error:", vars(e))
-    return redirect(redirect_url)
+    return redirect(redirect_http)
 
 
 if __name__ == "__main__":
