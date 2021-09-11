@@ -31,7 +31,6 @@ dummy_img = os.listdir(path_to_dummy)
 
 @app.route("/")
 def index():
-    print(APPLICATION_ID)
     return render_template('index.html')
 
 
@@ -51,7 +50,7 @@ def test():
         book_info = get_book_info.getBookInfoTest(book_title, author, APPLICATION_ID)
         print(book_info)
         if (book_info):
-            print(path_to_dummy + "/" + dummy_img[index])
+            # print(path_to_dummy + "/" + dummy_img[index])
             book_info["mediumImageUrl"] = path_to_dummy + "/" + dummy_img[index]
             books_info.append(book_info)
             index += 1
@@ -106,4 +105,4 @@ def login():
 
 
 if __name__ == "__main__":
-    app.run(debug=False, port=8000, threaded=True)
+    app.run(debug=False, port=8000)

@@ -91,7 +91,6 @@ def getBookInfoFromTitleAndAuthorAndPublisher(title, author, publisher, APPLICAT
 
 
 def getBookInfoFromTitle(title, APPLICATION_ID):
-    print(title)
     rakuten_books_api_url = "https://app.rakuten.co.jp/services/api/BooksBook/Search/20170404"
     params = {
             "format": "json",
