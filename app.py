@@ -79,7 +79,7 @@ def result():
         token = session['request_token']
     except Exception as e:
         print(e)
-        return 
+        return render_template('index.html')
     session.pop('request_token', None)
     auth.request_token = token
 
