@@ -23,7 +23,7 @@ const router = new VueRouter({
 })
 
 
-var app = new Vue({
+const app = new Vue({
   el: '#appRoot',
   router,
   data() {
