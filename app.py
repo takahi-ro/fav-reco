@@ -70,7 +70,7 @@ def login():
         session['request_token'] = auth.request_token
     except tp.TweepError as e:
         print("Tweepy Error:", vars(e))
-        return render_template("index.html")
+        # return render_template("index.html")
     return redirect(redirect_http)
 
 
@@ -90,7 +90,7 @@ def result():
         auth.get_access_token(verifier)
     except tp.TweepError as e:
         print(vars(e))
-        return render_template('index.html')
+        # return render_template('index.html')
 
     api = tp.API(auth)
     favorite_tweets = getFavorites(api, 50)
