@@ -80,11 +80,11 @@ def result():
     auth = tp.OAuthHandler(CONSUMER_API_KEY, CONSUMER_SECRET_API_KEY, CALLBACK_URL)
     try:
         token = session['request_token']
+        session.pop('request_token', None)
+        auth.request_token = token
     except Exception as e:
         print(e)
-        return render_template('index.html')
-    session.pop('request_token', None)
-    auth.request_token = token
+        # return render_template('index.html')
 
     try:
         auth.get_access_token(verifier)
@@ -135,4 +135,4 @@ def getFavorites(api, count=10):
     return fav_tweet_texts
 
 if __name__ == "__main__":
-    app.run(debug=False, port=8000)
+    app.run(debug=True, port=8000)
