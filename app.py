@@ -1,6 +1,9 @@
 import os
 import time
 import random
+import re
+import string
+import unicodedata
 import tweepy as tp
 from libs import get_book_info, aozora_api, new_recommend
 from dotenv import load_dotenv
@@ -50,7 +53,6 @@ def test():
         book_info = get_book_info.getBookInfoTest(book_title, author, APPLICATION_ID)
         print(book_info)
         if (book_info):
-            # print(path_to_dummy + "/" + dummy_img[index])
             book_info["mediumImageUrl"] = path_to_dummy + "/" + dummy_img[index]
             books_info.append(book_info)
             index += 1
@@ -75,7 +77,7 @@ def login():
 @app.route("/result", methods=['GET'])
 def result():
     verifier = request.args.get('oauth_verifier')
-    auth = tp.OAuthHandler(CONSUMER_API_KEY, CONSUMER_SECRET_API_KEY)
+    auth = tp.OAuthHandler(CONSUMER_API_KEY, CONSUMER_SECRET_API_KEY, CALLBACK_URL)
     try:
         token = session['request_token']
     except Exception as e:
@@ -91,9 +93,10 @@ def result():
         return render_template('index.html')
 
     api = tp.API(auth)
-    user_id = api.me().screen_name
-    results = new_recommend.getMostSimilerClusterOfFavs(user_id, path_to_aozora, path_to_dict, path_to_model)
+    favorite_tweets = getFavorites(api, 50)
+    results = new_recommend.getMostSimilerClusterOfFavs(favorite_tweets, path_to_aozora, path_to_dict, path_to_model)
     books_info = []
+
     for title, author in results.items():
         print(title, author)
         book_info = get_book_info.getBookInfoFromTitle(title, APPLICATION_ID)
@@ -112,6 +115,24 @@ def result():
     return render_template('result.html', books_info=books_info)
 
 
+def removeSymbol(text):
+    text = unicodedata.normalize("NFKC", text)
+    exclusion = "〔〕「」『』【】、。・" + "\n" + "\r" + "\u3000"
+    text = text.translate(str.maketrans("", "", string.punctuation  + exclusion))
+    return text
+
+
+def getFavorites(api, count=10):
+    user_id = api.me().screen_name
+    fav_tweets = api.favorites(user_id, count)
+    url_pattern = re.compile("https://")
+    text_only_tweets = []
+    for tweet in fav_tweets:
+        if not(url_pattern.search(tweet.text)):
+            text_only_tweets.append(tweet.text)
+
+    fav_tweet_texts = [removeSymbol(t) for t in text_only_tweets]
+    return fav_tweet_texts
 
 if __name__ == "__main__":
     app.run(debug=False, port=8000)

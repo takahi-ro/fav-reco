@@ -49,7 +49,7 @@ def cos_sim(v1, v2):
     return np.dot(v1, v2) / (np.linalg.norm(v1) * np.linalg.norm(v2))
 
 
-def getMostSimilerClusterOfFavs(twitter_id, path_to_textdata, path_to_dict, path_to_model):
+def getMostSimilerClusterOfFavs(favorites, path_to_textdata, path_to_dict, path_to_model):
     m = Doc2Vec.load(path_to_model)
     df = pd.read_csv(path_to_textdata)
 
@@ -77,8 +77,7 @@ def getMostSimilerClusterOfFavs(twitter_id, path_to_textdata, path_to_dict, path
         _cluster_vector /= len(cluster_to_docs[c])
         cluster_vector[c] = _cluster_vector
 
-    favorite_tweets = getFavs(twitter_id, 100)
-    wakati_tweets = textsToWakatiList(favorite_tweets, path_to_dict)
+    wakati_tweets = textsToWakatiList(favorites, path_to_dict)
     sentences = []
     for tweet in wakati_tweets:
         sentences.append(tweet.split(' '))
