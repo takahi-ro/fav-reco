@@ -18,7 +18,7 @@ const routes = [
 
 const router = new VueRouter({
   mode: 'history',
-  routes // `routes: routes` の短縮表記
+  routes 
 })
 
 
