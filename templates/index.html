@@ -7,13 +7,13 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>つぶやき書店</title>
   <link rel="icon" href="../static/img/favicon.ico">
-  <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14"></script>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
   <link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" rel="stylesheet">
   <link rel="stylesheet" href="../static/css/style.css">
   <!-- Vue routerのCDN -->
-  <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
+  <script src="https://unpkg.com/vue-router@3.0.7/dist/vue-router.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14"></script>
   <style>
     .bd-placeholder-img {
       font-size: 1.125rem;
@@ -121,36 +121,12 @@
       </div>
     </div>
 
-    <router-view :usage="HowtoUse">
-
-    </router-view>
-
-
-
     <div>
       <a href="#" id="page-top">TOP</a>
     </div>
 
-    <footer class="card-footer text-muted footer">
-      <img class="my-3 ms-2 h-auto" style="width:150px;" src="../static/img/logo_white-04.png" alt="ロゴ">
-      <ul style="list-style: none; " class="mb-5 text-light list-group-flush">
-        <a href="/" class="text-decoration-none text-light">
-          <li @click="changeActive1">- TOP(つぶやき書店とは） </li>
-        </a>
-        <router-link to="/usage" class="text-decoration-none text-light">
-          <li @click="changeActive2">- 使い方</li>
-        </router-link>
-        <a href="/login" class="text-decoration-none text-light">
-          <li>- 書店を利用する</li>
-        </a>
-        <!-- <li>- プライバシーポリシー</li> -->
-        <li>- リリースノート</li>
-      </ul>
-    </footer>
-  </div>
-
-  <script type='text/x-template' id='usage'>
-   <div class="HowtoUse container"  v-if="usage">
+    <router-view :usage="HowtoUse">
+   <div class="HowtoUse container"  v-if="HowtoUse">
       <div class="mt-5 w-75 text-center headTitle mx-auto" style="background-color: #150210BF;">
         <p class="p-3 fs-1 text-light align-middle">ご利用方法</p>
       </div>
@@ -190,7 +166,29 @@
       </div>
 
     </div>
-  </script>
+    </router-view>
+
+
+
+
+    <footer class="card-footer text-muted footer">
+      <img class="my-3 ms-2 h-auto" style="width:150px;" src="../static/img/logo_white-04.png" alt="ロゴ">
+      <ul style="list-style: none; " class="mb-5 text-light list-group-flush">
+        <a href="/" class="text-decoration-none text-light">
+          <li @click="changeActive1">- TOP(つぶやき書店とは） </li>
+        </a>
+        <router-link to="/usage" class="text-decoration-none text-light">
+          <li @click="changeActive2">- 使い方</li>
+        </router-link>
+        <a href="/login" class="text-decoration-none text-light">
+          <li>- 書店を利用する</li>
+        </a>
+        <!-- <li>- プライバシーポリシー</li> -->
+        <li>- リリースノート</li>
+      </ul>
+    </footer>
+  </div>
+
  
 
   <!-- <script type='text/x-template' id='login'>
