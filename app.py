@@ -118,7 +118,7 @@ def result():
 def removeSymbol(text):
     text = unicodedata.normalize("NFKC", text)
     exclusion = "〔〕「」『』【】、。・" + "\n" + "\r" + "\u3000"
-    text = text.translate(str.maketrans("", "", string.punctuation  + exclusion))
+    text = text.translate(str.maketrans("", "", string.punctuation + exclusion))
     return text
 
 
@@ -133,6 +133,7 @@ def getFavorites(api, count=10):
 
     fav_tweet_texts = [removeSymbol(t) for t in text_only_tweets]
     return fav_tweet_texts
+
 
 if __name__ == "__main__":
     app.run(debug=True, port=8000)
