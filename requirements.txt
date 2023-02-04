@@ -8,6 +8,6 @@ tweepy==3.10.0
 mecab-python3==1.0.6
 unidic-lite
 pandas==1.2.5
-gensim==4.0.1
+gensim==4.3.0
 numpy==1.21.0
 scikit-learn==0.24.2
