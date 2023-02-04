@@ -5,7 +5,7 @@ PyTweening==1.0.3
 requests==2.26.0
 Werkzeug==2.0.1
 tweepy==3.10.0
-mecab-python3==1.0.4
+mecab-python3==1.0.6
 unidic-lite
 pandas==1.2.5
 gensim==4.0.1
